@@ -1,0 +1,732 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     30418,        724]
+NotebookOptionsPosition[     29177,        695]
+NotebookOutlinePosition[     29643,        712]
+CellTagsIndexPosition[     29600,        709]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "Utilities`CleanSlate`"}], "\[IndentingNewLine]", 
+ RowBox[{"CleanSlate", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ClearInOut", "[", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pdConv", "[", "f_", "]"}], ":=", 
+   RowBox[{"TraditionalForm", "[", 
+    RowBox[{"f", "/.", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Derivative", "[", "inds__", "]"}], "[", "g_", "]"}], "[", 
+       "vars__", "]"}], "\[RuleDelayed]", 
+      RowBox[{"Apply", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Defer", "[", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"g", "[", "vars", "]"}], ",", "##"}], "]"}], "]"}], "&"}],
+         ",", 
+        RowBox[{
+         RowBox[{"Transpose", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", "vars", "}"}], ",", 
+            RowBox[{"{", "inds", "}"}]}], "}"}], "]"}], "/.", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "0"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"Sequence", "[", "]"}]}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "1"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", "var", "}"}]}]}], "}"}]}]}], "]"}]}]}], "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"https", ":"}], "//", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"blog", ".", "wolfram", ".", "com"}], "/", "2011"}], "/", 
+        "12"}], "/", "15"}], "/", "mathematica"}], "-", "qa", "-", "series", 
+     "-", "converting", "-", "to", "-", "conventional", "-", "mathematical", 
+     "-", 
+     RowBox[{"typesetting", "/"}]}]}], "\[IndentingNewLine]", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Needs", "[", "\"\<VariationalMethods`\>\"", "]"}]}], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"5425c2b4-4c29-4dcc-badf-832a85f255ae"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Contexts purged: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"Global`\"\>", "}"}]}],
+  SequenceForm["  (CleanSlate) Contexts purged: ", {"Global`"}],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[5]:=",ExpressionUUID->"58011632-a62c-47cf-8d6e-fbf8aa5cc79e"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Approximate kernel memory recovered: \"\>", 
+   "\[InvisibleSpace]", "\<\"63 Kb\"\>"}],
+  SequenceForm[
+  "  (CleanSlate) Approximate kernel memory recovered: ", "63 Kb"],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[5]:=",ExpressionUUID->"1591d4f8-4156-4e30-8ca5-450b12c12afa"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Utilities`CleanSlate`\"\>", ",", "\<\"VariationalMethods`\"\>",
+    ",", "\<\"DocumentationSearch`\"\>", ",", "\<\"ResourceLocator`\"\>", 
+   ",", "\<\"System`\"\>", ",", "\<\"Global`\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[0]=",ExpressionUUID->"cd364648-82c3-4083-9b51-b404c891a66f"]
+}, Open  ]],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "dynamic", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dynamic", " ", "=", " ", 
+     RowBox[{"Module", "[", " ", 
+      RowBox[{
+       RowBox[{"{", " ", "solution", " ", "}"}], " ", ",", 
+       "\[IndentingNewLine]", "  ", 
+       RowBox[{
+        RowBox[{"q", " ", "=", " ", 
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"\[Theta]1", "[", "t", "]"}], " ", ",", " ", 
+           RowBox[{"\[Theta]2", "[", "t", "]"}]}], " ", "}"}]}], " ", ";", 
+        "\[IndentingNewLine]", "  ", 
+        RowBox[{"r1", " ", "=", " ", 
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"l1", " ", 
+            RowBox[{"Sin", "[", 
+             RowBox[{"\[Theta]1", "[", "t", "]"}], "]"}]}], " ", ",", " ", 
+           RowBox[{
+            RowBox[{"-", " ", "l1"}], " ", 
+            RowBox[{"Cos", "[", 
+             RowBox[{"\[Theta]1", "[", "t", "]"}], "]"}]}]}], " ", "}"}]}], 
+        " ", ";", "\n", "\t", 
+        RowBox[{"r2", " ", "=", " ", 
+         RowBox[{"r1", " ", "+", " ", 
+          RowBox[{"{", " ", 
+           RowBox[{
+            RowBox[{"l2", " ", 
+             RowBox[{"Sin", "[", 
+              RowBox[{"\[Theta]2", "[", "t", "]"}], "]"}]}], " ", ",", " ", 
+            RowBox[{
+             RowBox[{"-", " ", "l2"}], " ", 
+             RowBox[{"Cos", "[", 
+              RowBox[{"\[Theta]2", "[", "t", "]"}], "]"}]}]}], " ", "}"}]}]}],
+         "  ", ";", "\n", "\t", 
+        RowBox[{"T", " ", "=", " ", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{
+             FractionBox["1", "2"], "m1", " ", 
+             RowBox[{"(", " ", 
+              RowBox[{
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "r1"}], " ", ".", " ", 
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "r1"}]}], " ", ")"}]}], " ",
+             "+", " ", 
+            RowBox[{
+             FractionBox["1", "2"], " ", "m2", " ", 
+             RowBox[{"(", " ", 
+              RowBox[{
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "r2"}], " ", ".", " ", 
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "r2"}]}], "  ", ")"}]}]}], 
+           " ", "//", " ", "Expand"}], " ", "//", " ", "Simplify"}]}], "  ", 
+        ";", "\[IndentingNewLine]", "  ", 
+        RowBox[{"V", " ", "=", " ", 
+         RowBox[{
+          RowBox[{"m1", " ", "g", " ", 
+           RowBox[{"r1", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}], " ", "+", " ", 
+          RowBox[{"m2", " ", "g", " ", 
+           RowBox[{"r2", "[", 
+            RowBox[{"[", "2", "]"}], "]"}]}]}]}], " ", ";", "\n", "\t", 
+        RowBox[{"\[ScriptCapitalL]", " ", "=", " ", 
+         RowBox[{"T", " ", "-", " ", "V"}]}], "  ", ";", 
+        "\[IndentingNewLine]", "  ", 
+        RowBox[{"eqs", " ", "=", " ", "\[IndentingNewLine]", 
+         RowBox[{"EulerEquations", "[", " ", 
+          RowBox[{"\[ScriptCapitalL]", " ", ",", " ", "q", ",", " ", "t"}], 
+          " ", "]"}]}], " ", ";", "\[IndentingNewLine]", "  ", 
+        RowBox[{"parameters", " ", "=", " ", 
+         RowBox[{"{", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"l1", " ", "\[Rule]", " ", "length1"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"l2", " ", "\[Rule]", " ", "length2"}], " ", ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"m1", " ", "\[Rule]", " ", "mass1"}], " ", ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"m2", " ", "\[Rule]", " ", "mass2"}], " ", ",", " ", 
+           "\[IndentingNewLine]", 
+           RowBox[{"g", " ", "\[Rule]", " ", "gravity"}]}], 
+          "\[IndentingNewLine]", "}"}]}], " ", ";", "\[IndentingNewLine]", 
+        RowBox[{"ics", " ", "=", " ", 
+         RowBox[{"{", " ", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"\[Theta]1", "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "\[Theta]10"}], " ", ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Theta]1", "'"}], "[", "0", "]"}], " ", "\[Equal]", 
+            " ", "v\[Theta]1"}], " ", ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"\[Theta]2", "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "\[Theta]20"}], " ", ",", " ", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Theta]2", "'"}], "[", "0", "]"}], " ", "\[Equal]", 
+            " ", "v\[Theta]20"}]}], " ", "\[IndentingNewLine]", "}"}]}], " ", 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"solution", " ", "=", " ", "\[IndentingNewLine]", 
+         RowBox[{"First", "[", 
+          RowBox[{"NDSolve", "[", " ", 
+           RowBox[{
+            RowBox[{"Union", "[", " ", 
+             RowBox[{
+              RowBox[{"eqs", " ", "/.", " ", "parameters"}], " ", ",", " ", 
+              "ics"}], " ", "]"}], " ", ",", " ", "q", " ", ",", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"t", ",", " ", "0", ",", " ", "tmax"}], " ", "}"}]}], 
+           " ", "]"}], "]"}]}], " ", ";", "\n", "\t", 
+        RowBox[{"Plot", "[", " ", 
+         RowBox[{
+          RowBox[{"Evaluate", "[", " ", 
+           RowBox[{"Evaluate", "[", 
+            RowBox[{"q", "/.", " ", "solution"}], " ", "]"}], " ", "]"}], " ",
+           ",", " ", 
+          RowBox[{"{", " ", 
+           RowBox[{"t", ",", " ", "0", ",", " ", "tmax"}], "}"}], ",", " ", 
+          RowBox[{"PlotRange", "\[Rule]", " ", 
+           RowBox[{"{", " ", 
+            RowBox[{
+             RowBox[{"-", "3"}], ",", "3"}], " ", "}"}]}], ",", " ", 
+          RowBox[{
+          "PlotLabel", "\[Rule]", " ", "\"\<Problem 2036 Page 539\>\""}], ",",
+           " ", 
+          RowBox[{"PlotLegends", "\[Rule]", " ", "q"}]}], "   ", "]"}]}]}], 
+      "  ", "]"}]}], ",", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"\[Theta]10", " ", ",", " ", "0.1", " ", ",", " ", "3"}], " ", 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"v\[Theta]1", " ", ",", " ", "0.1", " ", ",", " ", "3"}], " ", 
+     "}"}], " ", ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"\[Theta]20", " ", ",", " ", "0.1", ",", " ", "3"}], " ", "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"v\[Theta]20", " ", ",", " ", "0.1", ",", " ", "3"}], " ", "}"}],
+     " ", ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"mass1", " ", ",", " ", "0.1", " ", ",", " ", "3"}], " ", "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"mass2", " ", ",", " ", "0.1", " ", ",", " ", "10"}], " ", "}"}],
+     "  ", ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"length1", " ", ",", " ", "1", " ", ",", " ", "2"}], " ", "}"}], 
+    "  ", ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"length2", " ", ",", " ", "1", " ", ",", " ", "2"}], " ", "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"gravity", " ", ",", " ", "7", ",", " ", "9"}], " ", "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"tmax", " ", ",", " ", "5", " ", ",", " ", "30"}], " ", "}"}], 
+    " ", ",", "\[IndentingNewLine]", 
+    RowBox[{"ControlPlacement", "\[Rule]", " ", "Bottom"}]}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", "    ", "]"}], 
+  "  "}]}], "Input",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.},
+ CellLabel->"In[3]:=",ExpressionUUID->"1e8d42c8-5c34-40d6-9857-e45cceb89c16"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`gravity$$ = 7.638, $CellContext`length1$$ = 
+    1.2, $CellContext`length2$$ = 1.256, $CellContext`mass1$$ = 
+    1.935, $CellContext`mass2$$ = 5.9799999999999995`, $CellContext`tmax$$ = 
+    15.4, $CellContext`v\[Theta]1$$ = 
+    2.2600000000000002`, $CellContext`v\[Theta]20$$ = 
+    1.2400000000000002`, $CellContext`\[Theta]10$$ = 
+    1.9000000000000001`, $CellContext`\[Theta]20$$ = 0.1, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`\[Theta]10$$], 0.1, 3}, {
+      Hold[$CellContext`v\[Theta]1$$], 0.1, 3}, {
+      Hold[$CellContext`\[Theta]20$$], 0.1, 3}, {
+      Hold[$CellContext`v\[Theta]20$$], 0.1, 3}, {
+      Hold[$CellContext`mass1$$], 0.1, 3}, {
+      Hold[$CellContext`mass2$$], 0.1, 10}, {
+      Hold[$CellContext`length1$$], 1, 2}, {
+      Hold[$CellContext`length2$$], 1, 2}, {
+      Hold[$CellContext`gravity$$], 7, 9}, {
+      Hold[$CellContext`tmax$$], 5, 30}}, Typeset`size$$ = {
+    433., {121., 126.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`gravity$$ = 7, $CellContext`length1$$ = 
+        1, $CellContext`length2$$ = 1, $CellContext`mass1$$ = 
+        0.1, $CellContext`mass2$$ = 0.1, $CellContext`tmax$$ = 
+        5, $CellContext`v\[Theta]1$$ = 0.1, $CellContext`v\[Theta]20$$ = 
+        0.1, $CellContext`\[Theta]10$$ = 0.1, $CellContext`\[Theta]20$$ = 
+        0.1}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`dynamic = 
+       Module[{$CellContext`solution$}, $CellContext`q = {
+            $CellContext`\[Theta]1[$CellContext`t], 
+            $CellContext`\[Theta]2[$CellContext`t]}; $CellContext`r1 = \
+{$CellContext`l1 Sin[
+              $CellContext`\[Theta]1[$CellContext`t]], (-$CellContext`l1) 
+            Cos[
+              $CellContext`\[Theta]1[$CellContext`t]]}; $CellContext`r2 = \
+$CellContext`r1 + {$CellContext`l2 Sin[
+               $CellContext`\[Theta]2[$CellContext`t]], (-$CellContext`l2) Cos[
+               $CellContext`\[Theta]2[$CellContext`t]]}; $CellContext`T = 
+          Simplify[
+            Expand[(1/2) $CellContext`m1 Dot[
+                D[$CellContext`r1, $CellContext`t], 
+                D[$CellContext`r1, $CellContext`t]] + (1/2) $CellContext`m2 
+              Dot[
+                D[$CellContext`r2, $CellContext`t], 
+                
+                D[$CellContext`r2, $CellContext`t]]]]; $CellContext`V = \
+$CellContext`m1 $CellContext`g 
+            Part[$CellContext`r1, 2] + $CellContext`m2 $CellContext`g 
+            Part[$CellContext`r2, 
+              2]; $CellContext`\[ScriptCapitalL] = $CellContext`T - \
+$CellContext`V; $CellContext`eqs = 
+          VariationalMethods`EulerEquations[$CellContext`\[ScriptCapitalL], \
+$CellContext`q, $CellContext`t]; $CellContext`parameters = {$CellContext`l1 -> \
+$CellContext`length1$$, $CellContext`l2 -> $CellContext`length2$$, \
+$CellContext`m1 -> $CellContext`mass1$$, $CellContext`m2 -> \
+$CellContext`mass2$$, $CellContext`g -> $CellContext`gravity$$}; \
+$CellContext`ics = {$CellContext`\[Theta]1[0] == $CellContext`\[Theta]10$$, 
+            Derivative[1][$CellContext`\[Theta]1][
+             0] == $CellContext`v\[Theta]1$$, $CellContext`\[Theta]2[
+             0] == $CellContext`\[Theta]20$$, 
+            Derivative[1][$CellContext`\[Theta]2][
+             0] == $CellContext`v\[Theta]20$$}; $CellContext`solution$ = First[
+            NDSolve[
+             Union[
+              
+              ReplaceAll[$CellContext`eqs, $CellContext`parameters], \
+$CellContext`ics], $CellContext`q, {$CellContext`t, 0, $CellContext`tmax$$}]]; 
+         Plot[
+           Evaluate[
+            Evaluate[
+             
+             ReplaceAll[$CellContext`q, $CellContext`solution$]]], \
+{$CellContext`t, 0, $CellContext`tmax$$}, PlotRange -> {-3, 3}, PlotLabel -> 
+           "Problem 2036 Page 539", PlotLegends -> $CellContext`q]]), 
+      "Specifications" :> {{$CellContext`\[Theta]10$$, 0.1, 
+         3}, {$CellContext`v\[Theta]1$$, 0.1, 3}, {$CellContext`\[Theta]20$$, 
+         0.1, 3}, {$CellContext`v\[Theta]20$$, 0.1, 3}, {$CellContext`mass1$$,
+          0.1, 3}, {$CellContext`mass2$$, 0.1, 10}, {$CellContext`length1$$, 
+         1, 2}, {$CellContext`length2$$, 1, 2}, {$CellContext`gravity$$, 7, 
+         9}, {$CellContext`tmax$$, 5, 30}}, 
+      "Options" :> {ControlPlacement -> Bottom}, "DefaultOptions" :> {}],
+     ImageSizeCache->{478., {292., 298.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellLabel->"Out[4]=",ExpressionUUID->"d7936558-b9e7-42be-84e8-c6de6f95ff13"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "PlotStyle"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"58477076-41d6-4a6e-b289-2e740ca31c9c"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = True, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox[
+           PaneBox[
+            TooltipBox[
+             ButtonBox[
+              PaneSelectorBox[{False->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIcon"],
+                ImageSizeCache->{13., {4., 9.}}], True->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIconHot"],
+                ImageSizeCache->{13., {4., 9.}}]}, Dynamic[
+                CurrentValue["MouseOver"]]],
+              Appearance->None,
+              BaseStyle->"Link",
+              ButtonData->"paclet:ref/PlotStyle",
+              ButtonNote->"paclet:ref/PlotStyle"],
+             "\"paclet:ref/PlotStyle\""],
+            FrameMargins->{{0, 4}, {0, 2}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"PlotStyle is an option for plotting and related \
+functions that specifies styles in which objects are to be drawn. \"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False, False, False, False, 
+                False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Documentation\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Documentation\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Documentation", "Tooltip"]& ], 
+                   TemplateBox[{
+                    
+                    TemplateBox[{
+                    "\"Local \[RightGuillemet]\"", "paclet:ref/PlotStyle", 
+                    "paclet:ref/PlotStyle", "Link", {
+                    RGBColor[0.9686274509803922, 0.4666666666666667, 0.]}, 
+                    BaseStyle -> {
+                    RGBColor[0.0784313725490196, 0.1568627450980392, 0.6]}}, 
+                    "HyperlinkTemplate"], "\"  \"", 
+                    StyleBox[
+                    "\"|\"", "InformationRowLabel", StripOnInput -> False], 
+                    "\"  \"", 
+                    TemplateBox[{"\"Web \[RightGuillemet]\"", {
+                    URL[
+                    "http://reference.wolfram.com/language/ref/PlotStyle.\
+html"], None}, "http://reference.wolfram.com/language/ref/PlotStyle.html", 
+                    "Hyperlink", {
+                    RGBColor[0.9686274509803922, 0.4666666666666667, 0.]}, 
+                    BaseStyle -> {
+                    RGBColor[0.0784313725490196, 0.1568627450980392, 0.6]}}, 
+                    "HyperlinkTemplate"]},
+                    "RowDefault"]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", "Protected", "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"System`PlotStyle\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->6], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"],
+               ImageSizeCache->{10., {2., 8.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"],
+               ImageSizeCache->{10., {2., 8.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox[
+           PaneBox[
+            TooltipBox[
+             ButtonBox[
+              PaneSelectorBox[{False->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIcon"],
+                ImageSizeCache->{13., {4., 9.}}], True->
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIconHot"],
+                ImageSizeCache->{13., {4., 9.}}]}, Dynamic[
+                CurrentValue["MouseOver"]]],
+              Appearance->None,
+              BaseStyle->"Link",
+              ButtonData->"paclet:ref/PlotStyle",
+              ButtonNote->"paclet:ref/PlotStyle"],
+             "\"paclet:ref/PlotStyle\""],
+            FrameMargins->{{0, 4}, {0, 2}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"PlotStyle is an option for plotting and related \
+functions that specifies styles in which objects are to be drawn. \"\>", 
+             "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {2., 8.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {2., 8.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[
+   Association[
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "PlotStyle is an option for plotting and related functions that specifies \
+styles in which objects are to be drawn. ", "Documentation" -> 
+    Association[
+     "Local" -> "paclet:ref/PlotStyle", "Web" -> 
+      "http://reference.wolfram.com/language/ref/PlotStyle.html"], 
+    "OwnValues" -> None, "UpValues" -> None, "DownValues" -> None, 
+    "SubValues" -> None, "DefaultValues" -> None, "NValues" -> None, 
+    "FormatValues" -> None, "Options" -> None, "Attributes" -> {Protected}, 
+    "FullName" -> "System`PlotStyle"], False]]], "Output",
+ CellLabel->"Out[5]=",ExpressionUUID->"565f3e71-d0c3-431f-a1fd-e9abc39c140f"]
+}, Open  ]]
+},
+WindowSize->{955, 1030},
+WindowMargins->{{0, Automatic}, {Automatic, -360}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"67b90d98-08c3-4543-879c-ed7b6291a093"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2169, 57, 378, "Input",ExpressionUUID->"5425c2b4-4c29-4dcc-badf-832a85f255ae"],
+Cell[CellGroupData[{
+Cell[2774, 83, 352, 8, 24, "Print",ExpressionUUID->"58011632-a62c-47cf-8d6e-fbf8aa5cc79e"],
+Cell[3129, 93, 369, 9, 24, "Print",ExpressionUUID->"1591d4f8-4156-4e30-8ca5-450b12c12afa"]
+}, Open  ]],
+Cell[3513, 105, 331, 5, 41, "Output",ExpressionUUID->"cd364648-82c3-4083-9b51-b404c891a66f"]
+}, Open  ]],
+Cell[3859, 113, 7612, 173, 947, "Input",ExpressionUUID->"1e8d42c8-5c34-40d6-9857-e45cceb89c16",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.}],
+Cell[11474, 288, 5436, 103, 616, "Output",ExpressionUUID->"d7936558-b9e7-42be-84e8-c6de6f95ff13"],
+Cell[CellGroupData[{
+Cell[16935, 395, 130, 2, 41, "Input",ExpressionUUID->"58477076-41d6-4a6e-b289-2e740ca31c9c"],
+Cell[17068, 399, 12093, 293, 199, "Output",ExpressionUUID->"565f3e71-d0c3-431f-a1fd-e9abc39c140f"]
+}, Open  ]]
+}
+]
+*)
+
