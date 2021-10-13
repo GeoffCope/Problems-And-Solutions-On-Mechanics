@@ -1,0 +1,583 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     25187,        575]
+NotebookOptionsPosition[     24171,        550]
+NotebookOutlinePosition[     24637,        567]
+CellTagsIndexPosition[     24594,        564]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "Utilities`CleanSlate`"}], "\[IndentingNewLine]", 
+ RowBox[{"CleanSlate", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ClearInOut", "[", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pdConv", "[", "f_", "]"}], ":=", 
+   RowBox[{"TraditionalForm", "[", 
+    RowBox[{"f", "/.", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Derivative", "[", "inds__", "]"}], "[", "g_", "]"}], "[", 
+       "vars__", "]"}], "\[RuleDelayed]", 
+      RowBox[{"Apply", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Defer", "[", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"g", "[", "vars", "]"}], ",", "##"}], "]"}], "]"}], "&"}],
+         ",", 
+        RowBox[{
+         RowBox[{"Transpose", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", "vars", "}"}], ",", 
+            RowBox[{"{", "inds", "}"}]}], "}"}], "]"}], "/.", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "0"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"Sequence", "[", "]"}]}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "1"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", "var", "}"}]}]}], "}"}]}]}], "]"}]}]}], "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"https", ":"}], "//", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"blog", ".", "wolfram", ".", "com"}], "/", "2011"}], "/", 
+        "12"}], "/", "15"}], "/", "mathematica"}], "-", "qa", "-", "series", 
+     "-", "converting", "-", "to", "-", "conventional", "-", "mathematical", 
+     "-", 
+     RowBox[{"typesetting", "/"}]}]}], "\[IndentingNewLine]", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Needs", "[", "\"\<VariationalMethods`\>\"", "]"}]}], "Input",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.},
+ CellLabel->"In[5]:=",ExpressionUUID->"7b6a5f6f-f0d2-44da-9413-196ed02a4c7e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Contexts purged: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"Global`\"\>", "}"}]}],
+  SequenceForm["  (CleanSlate) Contexts purged: ", {"Global`"}],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[5]:=",ExpressionUUID->"938f993b-813d-4473-937d-283343ec757f"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Approximate kernel memory recovered: \"\>", 
+   "\[InvisibleSpace]", "\<\"83 Kb\"\>"}],
+  SequenceForm[
+  "  (CleanSlate) Approximate kernel memory recovered: ", "83 Kb"],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[5]:=",ExpressionUUID->"39b6a5e1-1078-4d00-bf27-19cf4a8e7e2b"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Utilities`CleanSlate`\"\>", ",", "\<\"VariationalMethods`\"\>",
+    ",", "\<\"DocumentationSearch`\"\>", ",", "\<\"ResourceLocator`\"\>", 
+   ",", "\<\"System`\"\>", ",", "\<\"Global`\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[0]=",ExpressionUUID->"4d87152a-e9e4-45ad-8dd2-1d7796d7697f"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"SEE", " ", "IF", " ", 
+    RowBox[{"there", "'"}], "s", " ", "a", " ", "g", " ", "floating", " ", 
+    "around", " ", 
+    RowBox[{"that", "'"}], "s", " ", "missing"}], " ", "*)"}], " ", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "Figure", " ", "out", " ", "how", " ", "to", " ", "scale", " ", "the", " ",
+     "constants", " ", "m", " ", "so", " ", "that", " ", "they", " ", "drop", 
+    " ", "out"}], " ", "*)"}], " ", "\n", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+    "Make", " ", "the", " ", "distinction", " ", "between", " ", "exact", " ",
+      "Lagrangian"}], ",", " ", 
+    RowBox[{"verus", " ", "the", " ", "one", " ", 
+     RowBox[{"they", "'"}], "re", " ", "using", " ", "for", " ", "an", " ", 
+     "approximation"}]}], " ", "*)"}], " ", "\n", 
+  RowBox[{
+   RowBox[{"Clear", "[", "dynamic", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dynamic", " ", "=", " ", 
+      RowBox[{"Module", "[", " ", 
+       RowBox[{
+        RowBox[{"{", "solution", "}"}], " ", ",", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", "  ", 
+        RowBox[{
+         RowBox[{"Clear", "[", "\[ScriptR]", "]"}], " ", ";", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"\[ScriptR]", " ", "=", " ", 
+          RowBox[{"{", " ", 
+           RowBox[{
+            RowBox[{"R", " ", 
+             RowBox[{"Sin", "[", 
+              RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}], " ", ",", " ", 
+            RowBox[{"R", " ", 
+             RowBox[{"(", " ", 
+              RowBox[{"1", " ", "-", " ", 
+               RowBox[{"Cos", "[", 
+                RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}], " ", ")"}]}]}], 
+           " ", "}"}]}], "  ", ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "q", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"q", " ", "=", " ", 
+          RowBox[{"Table", " ", "[", " ", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"x", "[", "i", "]"}], "[", "t", "]"}], " ", ",", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"i", ",", " ", "1", ",", "3"}], " ", "}"}]}], " ", 
+           "]"}]}], "  ", ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "mass", "]"}], " ", ";", "\[IndentingNewLine]",
+          "  ", 
+         RowBox[{"mass", " ", "=", " ", 
+          RowBox[{"{", " ", 
+           RowBox[{"m", " ", ",", " ", "M", " ", ",", " ", "m"}], " ", 
+           "}"}]}], "  ", ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "r", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"r", " ", "=", " ", 
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{
+             SqrtBox[
+              RowBox[{"mass", "[", 
+               RowBox[{"[", "i", "]"}], "]"}]], "  ", 
+             RowBox[{"{", " ", 
+              RowBox[{
+               RowBox[{"R", " ", 
+                RowBox[{"Sin", "[", 
+                 RowBox[{
+                  RowBox[{"\[Theta]", "[", "i", "]"}], "[", "t", "]"}], 
+                 "]"}]}], " ", ",", " ", 
+               RowBox[{"R", " ", 
+                RowBox[{"(", " ", 
+                 RowBox[{"1", " ", "-", " ", 
+                  RowBox[{"Cos", "[", 
+                   RowBox[{
+                    RowBox[{"\[Theta]", "[", "i", "]"}], "[", "t", "]"}], 
+                   "]"}]}], " ", ")"}]}]}], " ", "}"}]}], "  ", ",", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"i", ",", " ", "1", ",", "3"}], " ", "}"}]}], "  ", 
+           "]"}]}], "  ", ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "\[Theta]Replace", "]"}], " ", ";", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"\[Theta]Replace", " ", "=", " ", "\[IndentingNewLine]", 
+          RowBox[{"Table", "[", " ", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"\[Theta]", "[", "i", "]"}], "[", "t", "]"}], "\[Rule]",
+              " ", 
+             FractionBox[
+              RowBox[{
+               RowBox[{"x", "[", "i", "]"}], "[", "t", "]"}], "R"]}], " ", 
+            ",", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"i", ",", " ", "1", ",", " ", "3"}], " ", "}"}]}], " ", 
+           "]"}]}], "  ", ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "T", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "    ", 
+         RowBox[{"T", " ", "=", " ", 
+          RowBox[{
+           FractionBox["1", "2"], " ", 
+           RowBox[{"(", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"Sum", "[", " ", 
+                RowBox[{
+                 RowBox[{
+                  RowBox[{
+                   SubscriptBox["\[PartialD]", "t"], 
+                   RowBox[{"r", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}], "  ", ".", " ", 
+                  RowBox[{
+                   SubscriptBox["\[PartialD]", "t"], 
+                   RowBox[{"r", "[", 
+                    RowBox[{"[", "i", "]"}], "]"}]}]}], "  ", ",", " ", 
+                 RowBox[{"{", " ", 
+                  RowBox[{"i", ",", " ", "1", ",", " ", "3"}], " ", "}"}]}], 
+                " ", "]"}], "   ", "//.", " ", 
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "\[Theta]Replace"}]}], "  ",
+               "//", " ", "Expand"}], "  ", "//", " ", "Simplify"}], "  ", 
+            ")"}]}]}], "  ", ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "V1", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"V1", " ", "=", " ", 
+          RowBox[{
+           FractionBox["1", "2"], "K", " ", 
+           RowBox[{"(", " ", 
+            RowBox[{"Sum", "[", 
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"(", "  ", 
+                RowBox[{
+                 RowBox[{"Differences", "[", "q", "]"}], "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], " ", ")"}], "2"], " ", ",", 
+              " ", 
+              RowBox[{"{", " ", 
+               RowBox[{"i", ",", " ", "1", ",", " ", "2"}], " ", "}"}]}], " ",
+              "]"}], "  ", ")"}]}]}], "  ", ";", "\[IndentingNewLine]", "\n", 
+         "\t", 
+         RowBox[{"Clear", "[", "V2", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"V2", " ", "=", "  ", 
+          RowBox[{
+           RowBox[{"Sum", "[", " ", 
+            RowBox[{
+             RowBox[{
+              SqrtBox[
+               RowBox[{"mass", "[", 
+                RowBox[{"[", "i", "]"}], "]"}]], " ", 
+              RowBox[{"r", "[", 
+               RowBox[{"[", 
+                RowBox[{"i", ",", "2"}], "]"}], "]"}]}], " ", ",", " ", 
+             RowBox[{"{", " ", 
+              RowBox[{"i", ",", " ", "1", ",", " ", "3"}], " ", "}"}]}], " ", 
+            "]"}], "    ", "/.", " ", "\[Theta]Replace"}]}], "  ", ";", "\n", 
+         "\t", 
+         RowBox[{"Clear", "[", "V", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"V", " ", "=", " ", 
+          RowBox[{"V1", " ", "+", " ", "V2"}]}], "  ", ";", 
+         "\[IndentingNewLine]", "\n", "\t", 
+         RowBox[{"Clear", "[", "\[ScriptCapitalL]", "]"}], " ", ";", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"\[ScriptCapitalL]", " ", "=", " ", 
+          RowBox[{"T", " ", "-", " ", "V"}]}], "  ", ";", 
+         "\[IndentingNewLine]", "\n", "\t", 
+         RowBox[{"Clear", "[", "eqs", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"eqs", " ", "=", " ", "\[IndentingNewLine]", 
+          RowBox[{"EulerEquations", "[", " ", 
+           RowBox[{
+           "\[ScriptCapitalL]", " ", ",", " ", "q", " ", ",", " ", "t"}], " ",
+            "]"}]}], " ", ";", "\[IndentingNewLine]", "\n", "\t", 
+         RowBox[{"Clear", "[", "parameters", "]"}], " ", ";", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"parameters", " ", "=", " ", 
+          RowBox[{"{", " ", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"K", "\[Rule]", " ", "spring"}], " ", ",", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{"m", "\[Rule]", " ", "smallMass"}], " ", ",", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{"M", " ", "\[Rule]", " ", "largeMass"}], " ", ",", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{"R", "\[Rule]", " ", "Radius"}], ",", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{"g", "\[Rule]", " ", "gravity"}]}], "\[IndentingNewLine]",
+            "}"}]}], " ", ";", "\[IndentingNewLine]", "\n", "\t", 
+         RowBox[{"Clear", "[", "ics", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"ics", " ", "=", " ", 
+          RowBox[{"{", " ", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{
+              RowBox[{"x", "[", "1", "]"}], "[", "0", "]"}], " ", "\[Equal]", 
+             " ", "x10"}], " ", ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"x", "[", "1", "]"}], "'"}], "[", "0", "]"}], " ", 
+             "\[Equal]", " ", "vx1"}], " ", ",", " ", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"x", "[", "2", "]"}], "[", "0", "]"}], " ", "\[Equal]", 
+             " ", "x20"}], " ", ",", " ", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"x", "[", "2", "]"}], "'"}], "[", "0", "]"}], " ", 
+             "\[Equal]", " ", "vx2"}], "  ", ",", " ", "\[IndentingNewLine]", 
+            
+            RowBox[{
+             RowBox[{
+              RowBox[{"x", "[", "3", "]"}], "[", "0", "]"}], " ", "\[Equal]", 
+             " ", "x30"}], " ", ",", " ", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{"x", "[", "3", "]"}], "'"}], "[", "0", "]"}], " ", 
+             "\[Equal]", " ", "vx3"}]}], " ", "\[IndentingNewLine]", "}"}]}], 
+         " ", ";", "\[IndentingNewLine]", "\n", "\t", 
+         RowBox[{"Clear", "[", "solution", "]"}], " ", ";", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"solution", " ", "=", " ", 
+          RowBox[{"First", "[", 
+           RowBox[{"NDSolve", "[", " ", 
+            RowBox[{
+             RowBox[{"Union", "[", " ", 
+              RowBox[{
+               RowBox[{"eqs", " ", "/.", " ", "parameters"}], " ", ",", " ", 
+               "ics"}], " ", "]"}], " ", ",", " ", "q", " ", ",", " ", 
+             RowBox[{"{", " ", 
+              RowBox[{"t", ",", " ", "0", ",", " ", "tmax"}], " ", "}"}]}], 
+            " ", "]"}], "]"}]}], "  ", ";", "\n", "\t", 
+         RowBox[{"Plot", "[", " ", 
+          RowBox[{
+           RowBox[{"Evaluate", "[", 
+            RowBox[{"q", " ", "/.", " ", "solution"}], "]"}], " ", ",", " ", 
+           RowBox[{"{", " ", 
+            RowBox[{"t", ",", " ", "0", ",", " ", "tmax"}], " ", "}"}], " ", 
+           ",", " ", 
+           RowBox[{"PlotRange", "\[Rule]", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{
+              RowBox[{"-", "0.7"}], " ", ",", " ", "0.7"}], " ", "}"}]}], " ",
+            ",", " ", 
+           RowBox[{
+           "PlotLabel", "\[Rule]", " ", "\"\<Problem 2062 Page 604\>\""}], 
+           " ", ",", " ", 
+           RowBox[{"PlotLegends", "\[Rule]", " ", "q"}]}], " ", "]"}]}]}], 
+       " ", "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"x10", " ", ",", " ", "0.1", " ", ",", " ", "0.5"}], " ", "}"}],
+      " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"vx1", " ", ",", " ", "0", " ", ",", " ", "0.5"}], " ", "}"}], 
+     "  ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"x20", " ", ",", " ", "0.2", " ", ",", " ", "0.4"}], " ", "}"}],
+      " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"vx2", " ", ",", " ", "0", " ", ",", " ", "0.25"}], " ", "}"}], 
+     " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"x30", " ", ",", " ", "0.3", " ", ",", " ", "0.5"}], " ", "}"}],
+      " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"vx3", " ", ",", " ", "0", " ", ",", " ", "0.5"}], " ", "}"}], 
+     "  ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"spring", " ", ",", " ", "50", " ", ",", " ", "300"}], " ", 
+      "}"}], " ", ",", " ", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"smallMass", " ", ",", " ", "1", " ", ",", " ", "3"}], " ", 
+      "}"}], " ", ",", " ", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"largeMass", " ", ",", " ", "5", " ", ",", " ", "10"}], " ", 
+      "}"}], " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"Radius", " ", ",", " ", "4", " ", ",", "  ", "7"}], " ", "}"}],
+      " ", ",", " ", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"gravity", " ", ",", " ", "1.6", " ", ",", " ", "20"}], " ", 
+      "}"}], " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"tmax", " ", ",", " ", "4", ",", " ", "30"}], " ", "}"}], " ", 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"ControlPlacement", "\[Rule]", " ", "Bottom"}]}], " ", 
+    "\[IndentingNewLine]", " ", "\[IndentingNewLine]", "]"}]}]}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"4b0feb40-eb30-4d1c-88c2-6a2adf3c1251"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`gravity$$ = 
+    13.98, $CellContext`largeMass$$ = 5, $CellContext`Radius$$ = 
+    5.91, $CellContext`smallMass$$ = 1, $CellContext`spring$$ = 
+    73., $CellContext`tmax$$ = 11.95, $CellContext`vx1$$ = 
+    0.303, $CellContext`vx2$$ = 0.177, $CellContext`vx3$$ = 
+    0.3, $CellContext`x10$$ = 0.202, $CellContext`x20$$ = 
+    0.339, $CellContext`x30$$ = 0.4445, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`x10$$], 0.1, 0.5}, {
+      Hold[$CellContext`vx1$$], 0, 0.5}, {
+      Hold[$CellContext`x20$$], 0.2, 0.4}, {
+      Hold[$CellContext`vx2$$], 0, 0.25}, {
+      Hold[$CellContext`x30$$], 0.3, 0.5}, {
+      Hold[$CellContext`vx3$$], 0, 0.5}, {
+      Hold[$CellContext`spring$$], 50, 300}, {
+      Hold[$CellContext`smallMass$$], 1, 3}, {
+      Hold[$CellContext`largeMass$$], 5, 10}, {
+      Hold[$CellContext`Radius$$], 4, 7}, {
+      Hold[$CellContext`gravity$$], 1.6, 20}, {
+      Hold[$CellContext`tmax$$], 4, 30}}, Typeset`size$$ = {
+    440., {113., 117.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`gravity$$ = 1.6, $CellContext`largeMass$$ = 
+        5, $CellContext`Radius$$ = 4, $CellContext`smallMass$$ = 
+        1, $CellContext`spring$$ = 50, $CellContext`tmax$$ = 
+        4, $CellContext`vx1$$ = 0, $CellContext`vx2$$ = 0, $CellContext`vx3$$ = 
+        0, $CellContext`x10$$ = 0.1, $CellContext`x20$$ = 
+        0.2, $CellContext`x30$$ = 0.3}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`dynamic = 
+       Module[{$CellContext`solution$}, 
+         Clear[$CellContext`\[ScriptR]]; $CellContext`\[ScriptR] = \
+{$CellContext`R Sin[
+              $CellContext`\[Theta][$CellContext`t]], $CellContext`R (1 - 
+             Cos[
+              $CellContext`\[Theta][$CellContext`t]])}; 
+         Clear[$CellContext`q]; $CellContext`q = Table[
+            $CellContext`x[$CellContext`i][$CellContext`t], {$CellContext`i, 
+             1, 3}]; Clear[$CellContext`mass]; $CellContext`mass = \
+{$CellContext`m, $CellContext`M, $CellContext`m}; 
+         Clear[$CellContext`r]; $CellContext`r = Table[Sqrt[
+              Part[$CellContext`mass, $CellContext`i]] {$CellContext`R Sin[
+                $CellContext`\[Theta][$CellContext`i][$CellContext`t]], \
+$CellContext`R (1 - Cos[
+                $CellContext`\[Theta][$CellContext`i][$CellContext`t]])}, \
+{$CellContext`i, 1, 3}]; 
+         Clear[$CellContext`\[Theta]Replace]; $CellContext`\[Theta]Replace = 
+          Table[$CellContext`\[Theta][$CellContext`i][$CellContext`t] -> \
+$CellContext`x[$CellContext`i][$CellContext`t]/$CellContext`R, \
+{$CellContext`i, 1, 3}]; 
+         Clear[$CellContext`T]; $CellContext`T = (1/2) Simplify[
+             Expand[
+              ReplaceRepeated[
+               Sum[
+                Dot[
+                 D[
+                  Part[$CellContext`r, $CellContext`i], $CellContext`t], 
+                 D[
+                  
+                  Part[$CellContext`r, $CellContext`i], $CellContext`t]], \
+{$CellContext`i, 1, 3}], 
+               D[$CellContext`\[Theta]Replace, $CellContext`t]]]]; 
+         Clear[$CellContext`V1]; $CellContext`V1 = (1/2) K Sum[Part[
+               
+               Differences[$CellContext`q], $CellContext`i]^2, \
+{$CellContext`i, 1, 2}]; 
+         Clear[$CellContext`V2]; $CellContext`V2 = ReplaceAll[
+            Sum[Sqrt[
+               Part[$CellContext`mass, $CellContext`i]] 
+             Part[$CellContext`r, $CellContext`i, 2], {$CellContext`i, 1, 
+              3}], $CellContext`\[Theta]Replace]; 
+         Clear[$CellContext`V]; $CellContext`V = $CellContext`V1 + \
+$CellContext`V2; 
+         Clear[$CellContext`\[ScriptCapitalL]]; \
+$CellContext`\[ScriptCapitalL] = $CellContext`T - $CellContext`V; 
+         Clear[$CellContext`eqs]; $CellContext`eqs = 
+          VariationalMethods`EulerEquations[$CellContext`\[ScriptCapitalL], \
+$CellContext`q, $CellContext`t]; 
+         Clear[$CellContext`parameters]; $CellContext`parameters = {
+           K -> $CellContext`spring$$, $CellContext`m -> \
+$CellContext`smallMass$$, $CellContext`M -> $CellContext`largeMass$$, \
+$CellContext`R -> $CellContext`Radius$$, $CellContext`g -> \
+$CellContext`gravity$$}; 
+         Clear[$CellContext`ics]; $CellContext`ics = {$CellContext`x[1][
+             0] == $CellContext`x10$$, Derivative[1][
+              $CellContext`x[1]][0] == $CellContext`vx1$$, $CellContext`x[2][
+             0] == $CellContext`x20$$, Derivative[1][
+              $CellContext`x[2]][0] == $CellContext`vx2$$, $CellContext`x[3][
+             0] == $CellContext`x30$$, Derivative[1][
+              $CellContext`x[3]][0] == $CellContext`vx3$$}; 
+         Clear[$CellContext`solution$]; $CellContext`solution$ = First[
+            NDSolve[
+             Union[
+              
+              ReplaceAll[$CellContext`eqs, $CellContext`parameters], \
+$CellContext`ics], $CellContext`q, {$CellContext`t, 0, $CellContext`tmax$$}]]; 
+         Plot[
+           Evaluate[
+            
+            ReplaceAll[$CellContext`q, $CellContext`solution$]], \
+{$CellContext`t, 0, $CellContext`tmax$$}, PlotRange -> {-0.7, 0.7}, PlotLabel -> 
+           "Problem 2062 Page 604", PlotLegends -> $CellContext`q]]), 
+      "Specifications" :> {{$CellContext`x10$$, 0.1, 
+         0.5}, {$CellContext`vx1$$, 0, 0.5}, {$CellContext`x20$$, 0.2, 
+         0.4}, {$CellContext`vx2$$, 0, 0.25}, {$CellContext`x30$$, 0.3, 
+         0.5}, {$CellContext`vx3$$, 0, 0.5}, {$CellContext`spring$$, 50, 
+         300}, {$CellContext`smallMass$$, 1, 3}, {$CellContext`largeMass$$, 5,
+          10}, {$CellContext`Radius$$, 4, 7}, {$CellContext`gravity$$, 1.6, 
+         20}, {$CellContext`tmax$$, 4, 30}}, 
+      "Options" :> {ControlPlacement -> Bottom}, "DefaultOptions" :> {}],
+     ImageSizeCache->{485., {312., 318.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellLabel->"Out[4]=",ExpressionUUID->"67901e46-5a1d-410c-99a2-d8b366f2d4ef"]
+}, Open  ]]
+},
+WindowSize->{1198, 965},
+WindowMargins->{{1, Automatic}, {Automatic, -360}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"5330cd44-3a2b-445c-a73c-651848bf8d95"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2224, 58, 336, "Input",ExpressionUUID->"7b6a5f6f-f0d2-44da-9413-196ed02a4c7e",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.}],
+Cell[CellGroupData[{
+Cell[2807, 82, 352, 8, 24, "Print",ExpressionUUID->"938f993b-813d-4473-937d-283343ec757f"],
+Cell[3162, 92, 369, 9, 24, "Print",ExpressionUUID->"39b6a5e1-1078-4d00-bf27-19cf4a8e7e2b"]
+}, Open  ]],
+Cell[3546, 104, 331, 5, 41, "Output",ExpressionUUID->"4d87152a-e9e4-45ad-8dd2-1d7796d7697f"],
+Cell[CellGroupData[{
+Cell[3902, 113, 13418, 300, 1690, "Input",ExpressionUUID->"4b0feb40-eb30-4d1c-88c2-6a2adf3c1251"],
+Cell[17323, 415, 6832, 132, 684, "Output",ExpressionUUID->"67901e46-5a1d-410c-99a2-d8b366f2d4ef"]
+}, Open  ]]
+}
+]
+*)
+

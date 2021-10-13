@@ -1,0 +1,432 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     18243,        424]
+NotebookOptionsPosition[     17228,        399]
+NotebookOutlinePosition[     17695,        416]
+CellTagsIndexPosition[     17652,        413]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "Utilities`CleanSlate`"}], "\[IndentingNewLine]", 
+ RowBox[{"CleanSlate", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ClearInOut", "[", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pdConv", "[", "f_", "]"}], ":=", 
+   RowBox[{"TraditionalForm", "[", 
+    RowBox[{"f", "/.", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Derivative", "[", "inds__", "]"}], "[", "g_", "]"}], "[", 
+       "vars__", "]"}], "\[RuleDelayed]", 
+      RowBox[{"Apply", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Defer", "[", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"g", "[", "vars", "]"}], ",", "##"}], "]"}], "]"}], "&"}],
+         ",", 
+        RowBox[{
+         RowBox[{"Transpose", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", "vars", "}"}], ",", 
+            RowBox[{"{", "inds", "}"}]}], "}"}], "]"}], "/.", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "0"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"Sequence", "[", "]"}]}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "1"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", "var", "}"}]}]}], "}"}]}]}], "]"}]}]}], "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"https", ":"}], "//", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"blog", ".", "wolfram", ".", "com"}], "/", "2011"}], "/", 
+        "12"}], "/", "15"}], "/", "mathematica"}], "-", "qa", "-", "series", 
+     "-", "converting", "-", "to", "-", "conventional", "-", "mathematical", 
+     "-", 
+     RowBox[{"typesetting", "/"}]}]}], "\[IndentingNewLine]", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Needs", "[", "\"\<VariationalMethods`\>\"", "]"}]}], "Input",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.},
+ CellLabel->"In[5]:=",ExpressionUUID->"79a6eb28-f720-448f-a1b4-080a1990b537"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Contexts purged: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"Global`\"\>", "}"}]}],
+  SequenceForm["  (CleanSlate) Contexts purged: ", {"Global`"}],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[5]:=",ExpressionUUID->"790bc37c-949f-492f-b143-f6384ba3a1ca"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Approximate kernel memory recovered: \"\>", 
+   "\[InvisibleSpace]", "\<\"53 Kb\"\>"}],
+  SequenceForm[
+  "  (CleanSlate) Approximate kernel memory recovered: ", "53 Kb"],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[5]:=",ExpressionUUID->"667fbc04-5d5d-4422-b53b-405498b36dc0"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Utilities`CleanSlate`\"\>", ",", "\<\"VariationalMethods`\"\>",
+    ",", "\<\"DocumentationSearch`\"\>", ",", "\<\"ResourceLocator`\"\>", 
+   ",", "\<\"System`\"\>", ",", "\<\"Global`\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[0]=",ExpressionUUID->"80d68a7a-734c-4814-8215-ad33bdb3763b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"NOTATION", " ", ":", "\[IndentingNewLine]", 
+    RowBox[{
+    "q", " ", "for", " ", "generalized", " ", "coordinates", 
+     "\[IndentingNewLine]", "Q", " ", "for", " ", "charge"}]}], " ", 
+   "\[IndentingNewLine]", "*)"}], " ", "\n", 
+  RowBox[{
+   RowBox[{"Clear", "[", "dynamic", "]"}], "\[IndentingNewLine]", 
+   "\[IndentingNewLine]", 
+   RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"dynamic", " ", "=", " ", 
+      RowBox[{"Module", "[", " ", 
+       RowBox[{
+        RowBox[{"{", "solution", "}"}], " ", ",", " ", "\[IndentingNewLine]", 
+        "\[IndentingNewLine]", "  ", 
+        RowBox[{
+         RowBox[{"Clear", "[", "s", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"s", " ", "=", " ", 
+          RowBox[{"{", " ", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"r", "[", "t", "]"}], " ", 
+             RowBox[{"Cos", "[", 
+              RowBox[{"\[Phi]", "[", "t", "]"}], "]"}]}], " ", ",", " ", 
+            RowBox[{
+             RowBox[{"r", "[", "t", "]"}], " ", 
+             RowBox[{"Sin", "[", 
+              RowBox[{"\[Phi]", "[", "t", "]"}], "]"}]}], " ", ",", " ", 
+            RowBox[{
+             RowBox[{"r", "[", "t", "]"}], " ", 
+             RowBox[{"Cot", "[", "\[Alpha]", "]"}]}]}], " ", "}"}]}], "  ", 
+         ";", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+           RowBox[{"NOTE", ":", " ", 
+            RowBox[{"\[Alpha]", " ", "is", " ", "fixed"}]}], ",", " ", 
+           RowBox[{"NOT", " ", "time", " ", "dependent"}]}], " ", "*)"}], " ",
+          "\n", "\t", 
+         RowBox[{"Clear", "[", "T", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"T", " ", "=", " ", 
+          RowBox[{
+           FractionBox["1", "2"], " ", "m", " ", 
+           RowBox[{"(", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "s"}], " ", ".", " ", 
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "s"}]}], "  ", "//", " ", 
+              "Expand"}], "  ", "//", " ", "Simplify"}], " ", ")"}]}]}], "  ",
+          ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "V", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"V", " ", "=", " ", 
+          RowBox[{
+           RowBox[{"-", " ", 
+            RowBox[{"(", " ", 
+             FractionBox[
+              SuperscriptBox["Q", "2"], 
+              RowBox[{"4", " ", "\[Pi]", " ", "\[Epsilon]0"}]], ")"}]}], " ", 
+           
+           RowBox[{"(", 
+            FractionBox[
+             RowBox[{"Sin", "[", "\[Alpha]", "]"}], 
+             RowBox[{"r", "[", "t", "]"}]], ")"}]}]}], " ", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "component", " ", "along", " ", "radial", " ", "direction"}], " ", 
+          "*)"}], "  ", ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "\[ScriptCapitalL]", "]"}], " ", ";", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"\[ScriptCapitalL]", " ", "=", " ", 
+          RowBox[{"T", " ", "-", " ", "V"}]}], "  ", ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "q", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"q", " ", "=", " ", 
+          RowBox[{"{", " ", 
+           RowBox[{
+            RowBox[{"r", "[", "t", "]"}], " ", ",", " ", 
+            RowBox[{"\[Phi]", "[", "t", "]"}]}], " ", "}"}]}], "  ", ";", 
+         "\n", "\t", 
+         RowBox[{"Clear", "[", "eqs", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"eqs", " ", "=", " ", "\[IndentingNewLine]", 
+          RowBox[{"EulerEquations", "[", " ", 
+           RowBox[{"\[ScriptCapitalL]", " ", ",", " ", "q", ",", " ", "t"}], 
+           " ", "]"}]}], " ", ";", "\[IndentingNewLine]", "\n", "\t", 
+         RowBox[{"Clear", "[", "parameters", "]"}], " ", ";", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"parameters", " ", "=", " ", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"Q", " ", "\[Rule]", " ", "charge"}], " ", ",", " ", 
+            "\[IndentingNewLine]", 
+            RowBox[{"\[Epsilon]0", "\[Rule]", " ", "1"}], " ", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"\[Alpha]", " ", "\[Rule]", " ", "alpha"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"m", "\[Rule]", " ", "mass"}]}], "\[IndentingNewLine]", 
+           "}"}]}], ";", "\n", "\t", 
+         RowBox[{"Clear", "[", "ics", "]"}], " ", ";", "\[IndentingNewLine]", 
+         "  ", 
+         RowBox[{"ics", " ", "=", " ", 
+          RowBox[{"{", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"r", "[", "0", "]"}], "  ", "\[Equal]", " ", "r0"}], " ",
+             ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"r", "'"}], "[", "0", "]"}], " ", "\[Equal]", " ", 
+             "vr0"}], " ", ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"\[Phi]", "[", "0", "]"}], " ", "\[Equal]", " ", 
+             "\[Phi]0"}], " ", ",", " ", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"\[Phi]", "'"}], "[", "0", "]"}], " ", "\[Equal]", " ", 
+             "v\[Phi]0"}]}], "\[IndentingNewLine]", "}"}]}], " ", ";", "\n", 
+         "\t", 
+         RowBox[{"Clear", "[", "solution", "]"}], " ", ";", 
+         "\[IndentingNewLine]", "  ", 
+         RowBox[{"solution", " ", "=", " ", "\[IndentingNewLine]", 
+          RowBox[{"First", "[", 
+           RowBox[{"NDSolve", "[", " ", 
+            RowBox[{
+             RowBox[{"Union", "[", " ", 
+              RowBox[{
+               RowBox[{"eqs", " ", "/.", " ", "parameters"}], " ", ",", " ", 
+               "ics"}], " ", "]"}], " ", ",", " ", "q", " ", ",", " ", 
+             RowBox[{"{", " ", 
+              RowBox[{"t", ",", " ", "0", ",", " ", "tmax"}], " ", "}"}]}], 
+            " ", "]"}], " ", "]"}]}], " ", ";", "\n", "\t", 
+         RowBox[{"Plot", " ", "[", " ", 
+          RowBox[{
+           RowBox[{"Evaluate", "[", 
+            RowBox[{"q", " ", "/.", " ", "solution"}], "]"}], " ", ",", " ", 
+           RowBox[{"{", " ", 
+            RowBox[{"t", ",", " ", "0", ",", " ", "tmax"}], " ", "}"}], " ", 
+           ",", " ", 
+           RowBox[{
+           "PlotLabel", "\[Rule]", " ", "\"\<Problem 2060 Page 600\>\""}], 
+           " ", ",", " ", 
+           RowBox[{"PlotLegends", "\[Rule]", " ", "q"}]}], " ", "]"}]}]}], 
+       "  ", "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"r0", " ", ",", " ", "0.1", " ", ",", " ", "2"}], " ", "}"}], 
+     "  ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"vr0", " ", ",", " ", "0.1", " ", ",", " ", "3"}], " ", "}"}], 
+     " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"\[Phi]0", " ", ",", " ", "0", " ", ",", " ", "0.3"}], " ", 
+      "}"}], " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"v\[Phi]0", " ", ",", " ", "0.1", " ", ",", " ", "3"}], " ", 
+      "}"}], " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"charge", " ", ",", " ", 
+       RowBox[{"-", "2"}], " ", ",", " ", "2"}], " ", "}"}], " ", ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"alpha", " ", ",", " ", 
+       RowBox[{
+        RowBox[{"-", "\[Pi]"}], "/", "6"}], " ", ",", " ", 
+       RowBox[{"\[Pi]", "/", "6"}]}], " ", "}"}], " ", ",", " ", 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"mass", " ", ",", " ", "0.1", " ", ",", " ", "5"}], " ", "}"}], 
+     " ", ",", " ", "\[IndentingNewLine]", 
+     RowBox[{"{", " ", 
+      RowBox[{"tmax", " ", ",", " ", "5", " ", ",", " ", "30"}], " ", "}"}], 
+     " ", ",", "\[IndentingNewLine]", 
+     RowBox[{"ControlPlacement", "\[Rule]", " ", "Bottom"}]}], " ", 
+    "\[IndentingNewLine]", "]"}], "\n", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "Bifurcation", " ", "when", " ", "vr0", " ", "is", " ", "around", " ", 
+     "0.5", " ", "ish"}], " ", "*)"}], " "}]}]], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"0c1c543e-af48-4d93-a91a-da328cd6223c"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`alpha$$ = 
+    0.043982297150257144`, $CellContext`charge$$ = -1.27, $CellContext`mass$$ \
+= 3.2800000000000002`, $CellContext`r0$$ = 
+    1.7460000000000002`, $CellContext`tmax$$ = 19.4, $CellContext`vr0$$ = 
+    0.27, $CellContext`v\[Phi]0$$ = 1.175, $CellContext`\[Phi]0$$ = 
+    0.20650000000000002`, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`r0$$], 0.1, 2}, {
+      Hold[$CellContext`vr0$$], 0.1, 3}, {
+      Hold[$CellContext`\[Phi]0$$], 0, 0.3}, {
+      Hold[$CellContext`v\[Phi]0$$], 0.1, 3}, {
+      Hold[$CellContext`charge$$], -2, 2}, {
+      Hold[$CellContext`alpha$$], Rational[-1, 6] Pi, Rational[1, 6] Pi}, {
+      Hold[$CellContext`mass$$], 0.1, 5}, {
+      Hold[$CellContext`tmax$$], 5, 30}}, Typeset`size$$ = {
+    427., {119., 124.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`alpha$$ = 
+        Rational[-1, 6] Pi, $CellContext`charge$$ = -2, $CellContext`mass$$ = 
+        0.1, $CellContext`r0$$ = 0.1, $CellContext`tmax$$ = 
+        5, $CellContext`vr0$$ = 0.1, $CellContext`v\[Phi]0$$ = 
+        0.1, $CellContext`\[Phi]0$$ = 0}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`dynamic = 
+       Module[{$CellContext`solution$}, 
+         Clear[$CellContext`s]; $CellContext`s = \
+{$CellContext`r[$CellContext`t] Cos[
+              $CellContext`\[Phi][$CellContext`t]], \
+$CellContext`r[$CellContext`t] Sin[
+              $CellContext`\[Phi][$CellContext`t]], \
+$CellContext`r[$CellContext`t] Cot[$CellContext`\[Alpha]]}; 
+         Clear[$CellContext`T]; $CellContext`T = (1/2) $CellContext`m Simplify[
+             Expand[
+              Dot[
+               D[$CellContext`s, $CellContext`t], 
+               D[$CellContext`s, $CellContext`t]]]]; 
+         Clear[$CellContext`V]; $CellContext`V = (-($CellContext`Q^2/(4 
+             Pi $CellContext`\[Epsilon]0))) (
+            Sin[$CellContext`\[Alpha]]/$CellContext`r[$CellContext`t]); 
+         Clear[$CellContext`\[ScriptCapitalL]]; \
+$CellContext`\[ScriptCapitalL] = $CellContext`T - $CellContext`V; 
+         Clear[$CellContext`q]; $CellContext`q = {
+            $CellContext`r[$CellContext`t], 
+            $CellContext`\[Phi][$CellContext`t]}; 
+         Clear[$CellContext`eqs]; $CellContext`eqs = 
+          VariationalMethods`EulerEquations[$CellContext`\[ScriptCapitalL], \
+$CellContext`q, $CellContext`t]; 
+         Clear[$CellContext`parameters]; $CellContext`parameters = \
+{$CellContext`Q -> $CellContext`charge$$, $CellContext`\[Epsilon]0 -> 
+            1, $CellContext`\[Alpha] -> $CellContext`alpha$$, $CellContext`m -> \
+$CellContext`mass$$}; 
+         Clear[$CellContext`ics]; $CellContext`ics = {$CellContext`r[
+             0] == $CellContext`r0$$, 
+            Derivative[1][$CellContext`r][
+             0] == $CellContext`vr0$$, $CellContext`\[Phi][
+             0] == $CellContext`\[Phi]0$$, 
+            Derivative[1][$CellContext`\[Phi]][0] == $CellContext`v\[Phi]0$$}; 
+         Clear[$CellContext`solution$]; $CellContext`solution$ = First[
+            NDSolve[
+             Union[
+              
+              ReplaceAll[$CellContext`eqs, $CellContext`parameters], \
+$CellContext`ics], $CellContext`q, {$CellContext`t, 0, $CellContext`tmax$$}]]; 
+         Plot[
+           Evaluate[
+            
+            ReplaceAll[$CellContext`q, $CellContext`solution$]], \
+{$CellContext`t, 0, $CellContext`tmax$$}, PlotLabel -> 
+           "Problem 2060 Page 600", PlotLegends -> $CellContext`q]]), 
+      "Specifications" :> {{$CellContext`r0$$, 0.1, 2}, {$CellContext`vr0$$, 
+         0.1, 3}, {$CellContext`\[Phi]0$$, 0, 0.3}, {$CellContext`v\[Phi]0$$, 
+         0.1, 3}, {$CellContext`charge$$, -2, 2}, {$CellContext`alpha$$, 
+         Rational[-1, 6] Pi, Rational[1, 6] Pi}, {$CellContext`mass$$, 0.1, 
+         5}, {$CellContext`tmax$$, 5, 30}}, 
+      "Options" :> {ControlPlacement -> Bottom}, "DefaultOptions" :> {}],
+     ImageSizeCache->{472., {262., 268.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellLabel->"Out[4]=",ExpressionUUID->"537e2faa-d64e-4f5a-a3f6-0f991abf0084"]
+}, Open  ]]
+},
+WindowSize->{1050, 1000},
+WindowMargins->{{9, Automatic}, {Automatic, -360}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"cce58efa-25da-4139-88ee-20c52e8ee830"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2224, 58, 336, "Input",ExpressionUUID->"79a6eb28-f720-448f-a1b4-080a1990b537",
+ CellGroupingRules->{"GroupTogetherGrouping", 10000.}],
+Cell[CellGroupData[{
+Cell[2807, 82, 352, 8, 24, "Print",ExpressionUUID->"790bc37c-949f-492f-b143-f6384ba3a1ca"],
+Cell[3162, 92, 369, 9, 24, "Print",ExpressionUUID->"667fbc04-5d5d-4422-b53b-405498b36dc0"]
+}, Open  ]],
+Cell[3546, 104, 331, 5, 41, "Output",ExpressionUUID->"80d68a7a-734c-4814-8215-ad33bdb3763b"],
+Cell[CellGroupData[{
+Cell[3902, 113, 8306, 185, 1247, "Input",ExpressionUUID->"0c1c543e-af48-4d93-a91a-da328cd6223c"],
+Cell[12211, 300, 5001, 96, 584, "Output",ExpressionUUID->"537e2faa-d64e-4f5a-a3f6-0f991abf0084"]
+}, Open  ]]
+}
+]
+*)
+
