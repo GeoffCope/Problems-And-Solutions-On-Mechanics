@@ -1,0 +1,495 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     16621,        487]
+NotebookOptionsPosition[     14091,        433]
+NotebookOutlinePosition[     14553,        450]
+CellTagsIndexPosition[     14510,        447]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "Utilities`CleanSlate`"}], "\[IndentingNewLine]", 
+ RowBox[{"CleanSlate", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ClearInOut", "[", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pdConv", "[", "f_", "]"}], ":=", 
+   RowBox[{"TraditionalForm", "[", 
+    RowBox[{"f", "/.", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Derivative", "[", "inds__", "]"}], "[", "g_", "]"}], "[", 
+       "vars__", "]"}], "\[RuleDelayed]", 
+      RowBox[{"Apply", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Defer", "[", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"g", "[", "vars", "]"}], ",", "##"}], "]"}], "]"}], "&"}],
+         ",", 
+        RowBox[{
+         RowBox[{"Transpose", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", "vars", "}"}], ",", 
+            RowBox[{"{", "inds", "}"}]}], "}"}], "]"}], "/.", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "0"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"Sequence", "[", "]"}]}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "1"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", "var", "}"}]}]}], "}"}]}]}], "]"}]}]}], "]"}]}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Needs", "[", "\"\<VariationalMethods`\>\"", "]"}]}], "Input",
+ CellLabel->"In[1]:=",ExpressionUUID->"1d9b4b47-8ea9-4242-a92f-ed75e0cd49d5"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Contexts purged: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"Global`\"\>", "}"}]}],
+  SequenceForm["  (CleanSlate) Contexts purged: ", {"Global`"}],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"1733fefd-8959-4bf9-97ae-b68e9b1753f6"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Approximate kernel memory recovered: \"\>", 
+   "\[InvisibleSpace]", "\<\"2 Kb\"\>"}],
+  SequenceForm["  (CleanSlate) Approximate kernel memory recovered: ", "2 Kb"],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[1]:=",ExpressionUUID->"f4cae299-4dd6-4b60-9d89-dd5f223b715a"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Utilities`CleanSlate`\"\>", ",", "\<\"System`\"\>", 
+   ",", "\<\"Global`\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[0]=",ExpressionUUID->"0d5fec04-5e38-4bbd-9536-e9f8b7d9111d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "\[CapitalOmega]", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"\[CapitalOmega]", " ", "=", " ", 
+  RowBox[{"{", " ", 
+   RowBox[{"0", ",", " ", "0", ",", " ", "\[Omega]"}], " ", "}"}], 
+  " "}]}], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"ff0a0692-5c27-4d66-9eff-409d3999894c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"0", ",", "0", ",", "\[Omega]"}], "}"}]], "Output",
+ CellLabel->"Out[4]=",ExpressionUUID->"126beff3-5d4a-4b7a-8f44-acd8962bfebe"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "r", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"r", " ", "=", " ", 
+  RowBox[{"{", " ", 
+   RowBox[{
+    RowBox[{"x", "[", "t", "]"}], ",", " ", 
+    RowBox[{"y", "[", "t", "]"}], ",", " ", 
+    RowBox[{"z", "[", "t", "]"}]}], " ", "}"}], " "}]}], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"49eae1ba-89f7-46fb-ab3d-fc8d53203aa9"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"x", "[", "t", "]"}], ",", 
+   RowBox[{"y", "[", "t", "]"}], ",", 
+   RowBox[{"z", "[", "t", "]"}]}], "}"}]], "Output",
+ CellLabel->"Out[6]=",ExpressionUUID->"b613e544-f02e-4622-af5b-bb80df721790"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  SubscriptBox["\[PartialD]", "t"], "r"}]], "Input",
+ CellLabel->"In[7]:=",ExpressionUUID->"e6bb8689-f4c1-4487-a0a1-c9f6f39a4591"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    SuperscriptBox["x", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}], ",", 
+   RowBox[{
+    SuperscriptBox["y", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}], ",", 
+   RowBox[{
+    SuperscriptBox["z", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}]}], "}"}]], "Output",
+ CellLabel->"Out[7]=",ExpressionUUID->"d87aa13e-a42b-4ba9-9204-1a8604acdaad"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Cross", "[", " ", 
+  RowBox[{"\[CapitalOmega]", ",", " ", "r"}], "]"}]], "Input",
+ CellLabel->"In[8]:=",ExpressionUUID->"87469a0e-bdac-4641-bcdf-0b579d1d7c6e"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"-", "\[Omega]"}], " ", 
+    RowBox[{"y", "[", "t", "]"}]}], ",", 
+   RowBox[{"\[Omega]", " ", 
+    RowBox[{"x", "[", "t", "]"}]}], ",", "0"}], "}"}]], "Output",
+ CellLabel->"Out[8]=",ExpressionUUID->"ee14a608-89aa-46bf-bef4-843b240b071c"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "vprime", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"vprime", " ", "=", " ", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    SubscriptBox["\[PartialD]", "t"], "r"}], " ", "+", " ", 
+   RowBox[{"Cross", "[", " ", 
+    RowBox[{"\[CapitalOmega]", ",", " ", "r"}], "]"}], " "}]}]}], "Input",
+ CellLabel->"In[10]:=",ExpressionUUID->"aed06fe8-df24-4d53-b56c-c64737805931"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "\[Omega]"}], " ", 
+     RowBox[{"y", "[", "t", "]"}]}], "+", 
+    RowBox[{
+     SuperscriptBox["x", "\[Prime]",
+      MultilineFunction->None], "[", "t", "]"}]}], ",", 
+   RowBox[{
+    RowBox[{"\[Omega]", " ", 
+     RowBox[{"x", "[", "t", "]"}]}], "+", 
+    RowBox[{
+     SuperscriptBox["y", "\[Prime]",
+      MultilineFunction->None], "[", "t", "]"}]}], ",", 
+   RowBox[{
+    SuperscriptBox["z", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}]}], "}"}]], "Output",
+ CellLabel->"Out[11]=",ExpressionUUID->"e8c74a92-2c75-496a-afbb-864453d530d4"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"vprime", " ", ".", " ", "vprime"}], " ", "//", " ", "Expand"}], 
+  " ", "//", " ", "Simplify", " "}]], "Input",
+ CellLabel->"In[14]:=",ExpressionUUID->"13a286e2-ac82-472a-80c5-02708dfbec3e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   SuperscriptBox["\[Omega]", "2"], " ", 
+   SuperscriptBox[
+    RowBox[{"x", "[", "t", "]"}], "2"]}], "+", 
+  RowBox[{
+   SuperscriptBox["\[Omega]", "2"], " ", 
+   SuperscriptBox[
+    RowBox[{"y", "[", "t", "]"}], "2"]}], "-", 
+  RowBox[{"2", " ", "\[Omega]", " ", 
+   RowBox[{"y", "[", "t", "]"}], " ", 
+   RowBox[{
+    SuperscriptBox["x", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}]}], "+", 
+  SuperscriptBox[
+   RowBox[{
+    SuperscriptBox["x", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}], "2"], "+", 
+  RowBox[{"2", " ", "\[Omega]", " ", 
+   RowBox[{"x", "[", "t", "]"}], " ", 
+   RowBox[{
+    SuperscriptBox["y", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}]}], "+", 
+  SuperscriptBox[
+   RowBox[{
+    SuperscriptBox["y", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}], "2"], "+", 
+  SuperscriptBox[
+   RowBox[{
+    SuperscriptBox["z", "\[Prime]",
+     MultilineFunction->None], "[", "t", "]"}], "2"]}]], "Output",
+ CellLabel->"Out[14]=",ExpressionUUID->"cc7e5348-44c8-4f08-829f-f4275947b4c8"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Clear", "[", "\[ScriptCapitalL]", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"\[ScriptCapitalL]", " ", "=", " ", 
+  RowBox[{
+   RowBox[{
+    FractionBox["1", "2"], "m", " ", 
+    RowBox[{"(", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"vprime", " ", ".", " ", "vprime"}], " ", "//", " ", 
+       "Expand"}], " ", "//", " ", "Simplify"}], "  ", ")"}]}], " ", "-", " ", 
+   RowBox[{"V", "[", 
+    RowBox[{
+     RowBox[{"x", "[", "t", "]"}], ",", 
+     RowBox[{"y", "[", "t", "]"}], ",", 
+     RowBox[{"z", "[", "t", "]"}]}], "]"}]}]}]}], "Input",
+ CellLabel->"In[24]:=",ExpressionUUID->"8ea3c0bb-b9f8-46f5-84ba-0de97dbdce8d"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"-", 
+   RowBox[{"V", "[", 
+    RowBox[{
+     RowBox[{"x", "[", "t", "]"}], ",", 
+     RowBox[{"y", "[", "t", "]"}], ",", 
+     RowBox[{"z", "[", "t", "]"}]}], "]"}]}], "+", 
+  RowBox[{
+   FractionBox["1", "2"], " ", "m", " ", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      SuperscriptBox["\[Omega]", "2"], " ", 
+      SuperscriptBox[
+       RowBox[{"x", "[", "t", "]"}], "2"]}], "+", 
+     RowBox[{
+      SuperscriptBox["\[Omega]", "2"], " ", 
+      SuperscriptBox[
+       RowBox[{"y", "[", "t", "]"}], "2"]}], "-", 
+     RowBox[{"2", " ", "\[Omega]", " ", 
+      RowBox[{"y", "[", "t", "]"}], " ", 
+      RowBox[{
+       SuperscriptBox["x", "\[Prime]",
+        MultilineFunction->None], "[", "t", "]"}]}], "+", 
+     SuperscriptBox[
+      RowBox[{
+       SuperscriptBox["x", "\[Prime]",
+        MultilineFunction->None], "[", "t", "]"}], "2"], "+", 
+     RowBox[{"2", " ", "\[Omega]", " ", 
+      RowBox[{"x", "[", "t", "]"}], " ", 
+      RowBox[{
+       SuperscriptBox["y", "\[Prime]",
+        MultilineFunction->None], "[", "t", "]"}]}], "+", 
+     SuperscriptBox[
+      RowBox[{
+       SuperscriptBox["y", "\[Prime]",
+        MultilineFunction->None], "[", "t", "]"}], "2"], "+", 
+     SuperscriptBox[
+      RowBox[{
+       SuperscriptBox["z", "\[Prime]",
+        MultilineFunction->None], "[", "t", "]"}], "2"]}], 
+    ")"}]}]}]], "Output",
+ CellLabel->"Out[25]=",ExpressionUUID->"d69a3df1-620a-49c3-8291-ec34017812ab"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"EulerEquations", "[", 
+    RowBox[{"\[ScriptCapitalL]", ",", " ", "r", ",", " ", "t"}], "]"}], " ", "//",
+    " ", "TableForm"}], " ", "//", " ", "pdConv"}]], "Input",
+ CellLabel->"In[29]:=",ExpressionUUID->"56e7d2fe-0006-4019-b83f-c07a0e8b8deb"],
+
+Cell[BoxData[
+ FormBox[
+  TagBox[
+   TagBox[GridBox[{
+      {
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox[
+           RowBox[{"\[PartialD]", 
+            RowBox[{"V", "(", 
+             RowBox[{
+              RowBox[{"x", "(", "t", ")"}], ",", 
+              RowBox[{"y", "(", "t", ")"}], ",", 
+              RowBox[{"z", "(", "t", ")"}]}], ")"}]}], 
+           RowBox[{"\[PartialD]", 
+            RowBox[{"x", "(", "t", ")"}]}],
+           MultilineFunction->None]}], "-", 
+         RowBox[{"m", " ", 
+          FractionBox[
+           RowBox[{
+            SuperscriptBox["\[PartialD]", "2"], 
+            RowBox[{"x", "(", "t", ")"}]}], 
+           RowBox[{"\[PartialD]", 
+            SuperscriptBox["t", "2"]}],
+           MultilineFunction->None]}], "+", 
+         RowBox[{"m", " ", 
+          SuperscriptBox["\[Omega]", "2"], " ", 
+          RowBox[{"x", "(", "t", ")"}]}], "+", 
+         RowBox[{"2", " ", "m", " ", "\[Omega]", " ", 
+          FractionBox[
+           RowBox[{"\[PartialD]", 
+            RowBox[{"y", "(", "t", ")"}]}], 
+           RowBox[{"\[PartialD]", "t"}],
+           MultilineFunction->None]}]}], "\[LongEqual]", "0"}]},
+      {
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox[
+           RowBox[{"\[PartialD]", 
+            RowBox[{"V", "(", 
+             RowBox[{
+              RowBox[{"x", "(", "t", ")"}], ",", 
+              RowBox[{"y", "(", "t", ")"}], ",", 
+              RowBox[{"z", "(", "t", ")"}]}], ")"}]}], 
+           RowBox[{"\[PartialD]", 
+            RowBox[{"y", "(", "t", ")"}]}],
+           MultilineFunction->None]}], "-", 
+         RowBox[{"m", " ", 
+          FractionBox[
+           RowBox[{
+            SuperscriptBox["\[PartialD]", "2"], 
+            RowBox[{"y", "(", "t", ")"}]}], 
+           RowBox[{"\[PartialD]", 
+            SuperscriptBox["t", "2"]}],
+           MultilineFunction->None]}], "-", 
+         RowBox[{"2", " ", "m", " ", "\[Omega]", " ", 
+          FractionBox[
+           RowBox[{"\[PartialD]", 
+            RowBox[{"x", "(", "t", ")"}]}], 
+           RowBox[{"\[PartialD]", "t"}],
+           MultilineFunction->None]}], "+", 
+         RowBox[{"m", " ", 
+          SuperscriptBox["\[Omega]", "2"], " ", 
+          RowBox[{"y", "(", "t", ")"}]}]}], "\[LongEqual]", "0"}]},
+      {
+       RowBox[{
+        RowBox[{
+         RowBox[{"-", 
+          FractionBox[
+           RowBox[{"\[PartialD]", 
+            RowBox[{"V", "(", 
+             RowBox[{
+              RowBox[{"x", "(", "t", ")"}], ",", 
+              RowBox[{"y", "(", "t", ")"}], ",", 
+              RowBox[{"z", "(", "t", ")"}]}], ")"}]}], 
+           RowBox[{"\[PartialD]", 
+            RowBox[{"z", "(", "t", ")"}]}],
+           MultilineFunction->None]}], "-", 
+         RowBox[{"m", " ", 
+          FractionBox[
+           RowBox[{
+            SuperscriptBox["\[PartialD]", "2"], 
+            RowBox[{"z", "(", "t", ")"}]}], 
+           RowBox[{"\[PartialD]", 
+            SuperscriptBox["t", "2"]}],
+           MultilineFunction->None]}]}], "\[LongEqual]", "0"}]}
+     },
+     GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+     GridBoxSpacings->{"Columns" -> {
+         Offset[0.27999999999999997`], {
+          Offset[0.5599999999999999]}, 
+         Offset[0.27999999999999997`]}, "Rows" -> {
+         Offset[0.2], {
+          Offset[0.4]}, 
+         Offset[0.2]}}],
+    Column],
+   Function[BoxForm`e$, 
+    TableForm[BoxForm`e$]]], TraditionalForm]], "Output",
+ CellLabel->
+  "Out[29]//TraditionalForm=",ExpressionUUID->"539f4b68-b665-4b77-9d65-\
+5f9a6aa9485f"]
+}, Open  ]]
+},
+WindowSize->{872, 723},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"1ee14052-9f4c-4f6c-95fe-892da4177e74"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1644, 43, 273, "Input",ExpressionUUID->"1d9b4b47-8ea9-4242-a92f-ed75e0cd49d5"],
+Cell[CellGroupData[{
+Cell[2249, 69, 352, 8, 24, "Print",ExpressionUUID->"1733fefd-8959-4bf9-97ae-b68e9b1753f6"],
+Cell[2604, 79, 364, 8, 24, "Print",ExpressionUUID->"f4cae299-4dd6-4b60-9d89-dd5f223b715a"]
+}, Open  ]],
+Cell[2983, 90, 221, 4, 41, "Output",ExpressionUUID->"0d5fec04-5e38-4bbd-9536-e9f8b7d9111d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3241, 99, 318, 6, 63, "Input",ExpressionUUID->"ff0a0692-5c27-4d66-9eff-409d3999894c"],
+Cell[3562, 107, 168, 3, 41, "Output",ExpressionUUID->"126beff3-5d4a-4b7a-8f44-acd8962bfebe"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3767, 115, 370, 8, 63, "Input",ExpressionUUID->"49eae1ba-89f7-46fb-ab3d-fc8d53203aa9"],
+Cell[4140, 125, 248, 6, 41, "Output",ExpressionUUID->"b613e544-f02e-4622-af5b-bb80df721790"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4425, 136, 154, 3, 41, "Input",ExpressionUUID->"e6bb8689-f4c1-4487-a0a1-c9f6f39a4591"],
+Cell[4582, 141, 437, 12, 41, "Output",ExpressionUUID->"d87aa13e-a42b-4ba9-9204-1a8604acdaad"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5056, 158, 183, 3, 41, "Input",ExpressionUUID->"87469a0e-bdac-4641-bcdf-0b579d1d7c6e"],
+Cell[5242, 163, 303, 8, 41, "Output",ExpressionUUID->"ee14a608-89aa-46bf-bef4-843b240b071c"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5582, 176, 405, 8, 84, "Input",ExpressionUUID->"aed06fe8-df24-4d53-b56c-c64737805931"],
+Cell[5990, 186, 639, 19, 41, "Output",ExpressionUUID->"e8c74a92-2c75-496a-afbb-864453d530d4"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6666, 210, 237, 5, 41, "Input",ExpressionUUID->"13a286e2-ac82-472a-80c5-02708dfbec3e"],
+Cell[6906, 217, 1089, 32, 41, "Output",ExpressionUUID->"cc7e5348-44c8-4f08-829f-f4275947b4c8"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8032, 254, 652, 16, 79, "Input",ExpressionUUID->"8ea3c0bb-b9f8-46f5-84ba-0de97dbdce8d"],
+Cell[8687, 272, 1463, 43, 57, "Output",ExpressionUUID->"d69a3df1-620a-49c3-8291-ec34017812ab"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10187, 320, 293, 6, 41, "Input",ExpressionUUID->"56e7d2fe-0006-4019-b83f-c07a0e8b8deb"],
+Cell[10483, 328, 3592, 102, 126, "Output",ExpressionUUID->"539f4b68-b665-4b77-9d65-5f9a6aa9485f"]
+}, Open  ]]
+}
+]
+*)
+

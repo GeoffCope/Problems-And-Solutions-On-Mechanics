@@ -1,0 +1,1323 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 12.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     60932,       1315]
+NotebookOptionsPosition[     59712,       1285]
+NotebookOutlinePosition[     60177,       1302]
+CellTagsIndexPosition[     60134,       1299]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"<<", "Utilities`CleanSlate`"}], "\[IndentingNewLine]", 
+ RowBox[{"CleanSlate", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ClearInOut", "[", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"pdConv", "[", "f_", "]"}], ":=", 
+   RowBox[{"TraditionalForm", "[", 
+    RowBox[{"f", "/.", 
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{"Derivative", "[", "inds__", "]"}], "[", "g_", "]"}], "[", 
+       "vars__", "]"}], "\[RuleDelayed]", 
+      RowBox[{"Apply", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Defer", "[", 
+          RowBox[{"D", "[", 
+           RowBox[{
+            RowBox[{"g", "[", "vars", "]"}], ",", "##"}], "]"}], "]"}], "&"}],
+         ",", 
+        RowBox[{
+         RowBox[{"Transpose", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"{", "vars", "}"}], ",", 
+            RowBox[{"{", "inds", "}"}]}], "}"}], "]"}], "/.", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "0"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"Sequence", "[", "]"}]}], ",", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"var_", ",", "1"}], "}"}], "\[RuleDelayed]", 
+            RowBox[{"{", "var", "}"}]}]}], "}"}]}]}], "]"}]}]}], "]"}]}], 
+  "\[IndentingNewLine]", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"https", ":"}], "//", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"blog", ".", "wolfram", ".", "com"}], "/", "2011"}], "/", 
+        "12"}], "/", "15"}], "/", "mathematica"}], "-", "qa", "-", "series", 
+     "-", "converting", "-", "to", "-", "conventional", "-", "mathematical", 
+     "-", 
+     RowBox[{"typesetting", "/"}]}]}], "\[IndentingNewLine]", "*)"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Needs", "[", "\"\<VariationalMethods`\>\"", "]"}]}], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"a15d7a75-df14-4b8b-9bb1-fd89f5ec7448"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Contexts purged: \"\>", "\[InvisibleSpace]", 
+   RowBox[{"{", "\<\"Global`\"\>", "}"}]}],
+  SequenceForm["  (CleanSlate) Contexts purged: ", {"Global`"}],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[5]:=",ExpressionUUID->"bd81a46c-a460-4973-bd21-eb87a27c421a"],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"  (CleanSlate) Approximate kernel memory recovered: \"\>", 
+   "\[InvisibleSpace]", "\<\"56 Kb\"\>"}],
+  SequenceForm[
+  "  (CleanSlate) Approximate kernel memory recovered: ", "56 Kb"],
+  Editable->False]], "Print",
+ CellLabel->
+  "During evaluation of \
+In[5]:=",ExpressionUUID->"9e3e00f6-7f9a-4954-a364-ac039597103a"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Utilities`CleanSlate`\"\>", 
+   ",", "\<\"Parallel`Debug`Perfmon`\"\>", ",", "\<\"Parallel`Debug`\"\>", 
+   ",", "\<\"CompiledFunctionTools`\"\>", ",", "\<\"IPOPTLink`\"\>", 
+   ",", "\<\"VariationalMethods`\"\>", ",", "\<\"DocumentationSearch`\"\>", 
+   ",", "\<\"ResourceLocator`\"\>", ",", "\<\"System`\"\>", 
+   ",", "\<\"Global`\"\>"}], "}"}]], "Output",
+ CellLabel->"Out[0]=",ExpressionUUID->"d2e45bf6-07b8-4279-8d6b-398f9b7240e9"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "dynamic", "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"dynamic", " ", "=", " ", 
+     RowBox[{"Module", "[", " ", 
+      RowBox[{
+       RowBox[{"{", "solution", "}"}], " ", ",", "\[IndentingNewLine]", 
+       "\[IndentingNewLine]", "  ", 
+       RowBox[{
+        RowBox[{"Clear", "[", "q1", "]"}], "  ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"q1", " ", "=", " ", 
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"x", "[", "t", "]"}], ",", " ", 
+           RowBox[{"y", "[", "t", "]"}], ",", " ", 
+           RowBox[{"z", "[", "t", "]"}]}], " ", "}"}]}], "  ", ";", "\n", 
+        "         ", 
+        RowBox[{"Clear", "[", "q2", "]"}], " ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"q2", " ", "=", " ", 
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{"r", "[", "t", "]"}], ",", " ", 
+           RowBox[{"\[Theta]", "[", "t", "]"}], ",", " ", 
+           RowBox[{"\[Phi]", "[", "t", "]"}]}], " ", "}"}]}], "  ", ";", "\n",
+         "\t", 
+        RowBox[{"Clear", "[", "r2", "]"}], "   ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"r2", " ", "=", " ", 
+         RowBox[{"{", " ", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"r", "[", "t", "]"}], " ", 
+            RowBox[{"Cos", "[", 
+             RowBox[{"\[Phi]", "[", "t", "]"}], "]"}], "  ", 
+            RowBox[{"Sin", "[", 
+             RowBox[{"\[Theta]", "[", "t", "]"}], " ", "]"}]}], " ", ",", 
+           "  ", 
+           RowBox[{
+            RowBox[{"r", "[", "t", "]"}], " ", 
+            RowBox[{"Sin", "[", 
+             RowBox[{"\[Phi]", "[", "t", "]"}], "]"}], "  ", 
+            RowBox[{"Sin", "[", 
+             RowBox[{"\[Theta]", "[", "t", "]"}], " ", "]"}]}], " ", ",", " ", 
+           RowBox[{
+            RowBox[{"r", "[", "t", "]"}], " ", 
+            RowBox[{"Cos", "[", 
+             RowBox[{"\[Theta]", "[", "t", "]"}], "]"}]}]}], " ", "}"}]}], 
+        "  ", ";", "\n", "\t", 
+        RowBox[{"Clear", "[", "q", "]"}], " ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"q", " ", "=", " ", 
+         RowBox[{"Union", "[", 
+          RowBox[{"q1", ",", "q2"}], "]"}]}], " ", ";", "\n", "\t", 
+        RowBox[{"Clear", "[", "T", "]"}], " ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"T", " ", "=", " ", 
+         RowBox[{
+          RowBox[{
+           FractionBox["1", "2"], 
+           RowBox[{"(", 
+            RowBox[{"M", "+", " ", 
+             RowBox[{"2", " ", "m"}]}], " ", ")"}], " ", 
+           RowBox[{"(", " ", 
+            RowBox[{
+             RowBox[{
+              SubscriptBox["\[PartialD]", "t"], "q1"}], " ", ".", " ", 
+             RowBox[{
+              SubscriptBox["\[PartialD]", "t"], "q1"}]}], "  ", ")"}], " ", 
+           FractionBox["1", "2"], 
+           RowBox[{"(", 
+            RowBox[{"2", " ", "m"}], " ", ")"}], " ", 
+           RowBox[{"(", " ", 
+            RowBox[{
+             RowBox[{
+              RowBox[{
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "r2"}], " ", ".", " ", 
+               RowBox[{
+                SubscriptBox["\[PartialD]", "t"], "r2"}]}], "  ", "//", " ", 
+              "Expand"}], " ", "//", " ", "Simplify"}], "  ", ")"}]}], " ", 
+          "+", 
+          RowBox[{
+           FractionBox["1", "2"], 
+           RowBox[{"(", 
+            RowBox[{
+             FractionBox["1", "12"], "M", " ", 
+             SuperscriptBox["L", "2"]}], ")"}], " ", 
+           RowBox[{"(", " ", 
+            RowBox[{
+             SuperscriptBox[
+              RowBox[{
+               SuperscriptBox["\[Theta]", "\[Prime]",
+                MultilineFunction->None], "[", "t", "]"}], "2"], "+", 
+             RowBox[{
+              SuperscriptBox[
+               RowBox[{"Sin", "[", 
+                RowBox[{"\[Theta]", "[", "t", "]"}], "]"}], "2"], " ", 
+              SuperscriptBox[
+               RowBox[{
+                SuperscriptBox["\[Phi]", "\[Prime]",
+                 MultilineFunction->None], "[", "t", "]"}], "2"]}]}], "  ", 
+            ")"}]}]}]}], " ", ";", "\n", "\t", 
+        RowBox[{"Clear", "[", "V", "]"}], " ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"V", " ", "=", " ", 
+         RowBox[{"2", " ", 
+          RowBox[{"(", " ", 
+           RowBox[{
+            FractionBox["1", "2"], "K", " ", 
+            SuperscriptBox[
+             RowBox[{
+              RowBox[{"(", " ", 
+               RowBox[{
+                RowBox[{"r", "[", "t", "]"}], "-", "r0"}], " ", ")"}], " "}], 
+             "2"]}], ")"}]}]}], "  ", ";", "\n", "\t", 
+        RowBox[{"Clear", "[", "\[ScriptCapitalL]", "]"}], " ", ";", 
+        "\[IndentingNewLine]", "  ", 
+        RowBox[{"\[ScriptCapitalL]", " ", "=", " ", 
+         RowBox[{"T", " ", "-", " ", "V"}]}], " ", ";", "\n", "\t", 
+        RowBox[{"Clear", "[", "eqs", "]"}], " ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"eqs", " ", "=", " ", 
+         RowBox[{"EulerEquations", "[", " ", 
+          RowBox[{
+          "\[ScriptCapitalL]", " ", ",", " ", "q", " ", ",", " ", "t"}], 
+          "]"}]}], " ", ";", "\n", "\t", 
+        RowBox[{"Clear", "[", "com", "]"}], " ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"com", " ", "=", " ", 
+         RowBox[{"FirstIntegrals", "[", " ", 
+          RowBox[{"\[ScriptCapitalL]", " ", ",", " ", "q", ",", " ", "t"}], 
+          " ", "]"}]}], " ", ";", "\n", "\t", 
+        RowBox[{"Clear", "[", "ics", "]"}], " ", ";", "\[IndentingNewLine]", 
+        "  ", 
+        RowBox[{"ics", " ", "=", " ", 
+         RowBox[{"{", " ", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"x", "[", "0", "]"}], " ", "\[Equal]", " ", "x0"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"x", "'"}], "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "vx0"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"y", "[", "0", "]"}], " ", "\[Equal]", " ", "y0"}], " ", 
+           ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"y", "'"}], "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "vy0"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"z", "[", "0", "]"}], " ", "\[Equal]", " ", "z0"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"z", "'"}], "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "vz0"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"r", "[", "0", "]"}], " ", "\[Equal]", " ", "r0"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"r", "'"}], "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "vr0"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"\[Theta]", "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "\[Theta]0"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Theta]", "'"}], "[", "0", "]"}], " ", "\[Equal]", " ",
+             "v\[Theta]0"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"\[Phi]", "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "\[Phi]0"}], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"\[Phi]", "'"}], "[", "0", "]"}], " ", "\[Equal]", " ", 
+            "v\[Phi]0"}]}], "\[IndentingNewLine]", "}"}]}], " ", ";", "\n", 
+        "\t", 
+        RowBox[{"Clear", "[", "parameters", "]"}], " ", ";", 
+        "\[IndentingNewLine]", "  ", 
+        RowBox[{"parameters", " ", "=", " ", 
+         RowBox[{"{", " ", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"m", "\[Rule]", " ", "2"}], " ", ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"M", " ", "\[Rule]", " ", "10"}], " ", ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"L", "\[Rule]", " ", "2"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"K", "\[Rule]", " ", "2"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"r0", " ", "\[Rule]", "  ", "2"}]}], "\[IndentingNewLine]",
+           "}"}]}], " ", ";", "\n", "\t", 
+        RowBox[{"Clear", "[", "solution", "]"}], " ", ";", 
+        "\[IndentingNewLine]", "  ", 
+        RowBox[{"solution", " ", "=", " ", "\[IndentingNewLine]", 
+         RowBox[{"First", "[", 
+          RowBox[{"NDSolve", "[", " ", 
+           RowBox[{
+            RowBox[{"Union", "[", " ", 
+             RowBox[{
+              RowBox[{"eqs", " ", "/.", " ", "parameters"}], " ", ",", " ", 
+              "ics"}], " ", "]"}], " ", ",", " ", "q", ",", " ", 
+            RowBox[{"{", " ", 
+             RowBox[{"t", ",", " ", "0", ",", " ", "tmax"}], " ", "}"}], " ", 
+            ",", 
+            RowBox[{"Method", "->", 
+             RowBox[{"{", 
+              RowBox[{
+              "\"\<EquationSimplification\>\"", "->", "\"\<Residual\>\""}], 
+              "}"}]}]}], "]"}], " ", "]"}]}], " ", ";", "\[IndentingNewLine]",
+         "  ", "\n", "\t", 
+        RowBox[{"Plot", "[", " ", 
+         RowBox[{
+          RowBox[{"Evaluate", "[", " ", 
+           RowBox[{"q", " ", "/.", " ", "solution"}], " ", "]"}], ",", " ", 
+          RowBox[{"{", " ", 
+           RowBox[{"t", ",", " ", "0", ",", " ", "tmax"}], " ", "}"}], " ", 
+          ",", " ", 
+          RowBox[{
+          "PlotLabel", "\[Rule]", " ", "\"\<Problem 2004 Page 468\>\""}], " ",
+           ",", " ", 
+          RowBox[{"PlotLegends", "\[Rule]", " ", "q"}]}], " ", "]"}]}]}], " ",
+       "\[IndentingNewLine]", " ", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", "]"}]}], " ", ",", "\[IndentingNewLine]", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"x0", " ", ",", " ", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], 
+    " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"vx0", " ", ",", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], " ", 
+    ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"y0", " ", ",", " ", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], 
+    " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"vy0", " ", ",", " ", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], 
+    " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"z0", " ", ",", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], " ", 
+    ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"vz0", " ", ",", " ", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], 
+    " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"r0", " ", ",", " ", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], 
+    " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"vr0", " ", ",", " ", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], 
+    " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"\[Theta]0", " ", ",", "0.9", " ", ",", " ", "1.1"}], " ", "}"}],
+     " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"v\[Theta]0", " ", ",", " ", "0.9", " ", ",", " ", "1.1"}], " ", 
+     "}"}], " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"\[Phi]0", " ", ",", " ", "0.9", " ", ",", " ", "1.1"}], " ", 
+     "}"}], " ", ",", " ", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"v\[Phi]0", " ", ",", "0.9", " ", ",", " ", "1.1"}], " ", "}"}], 
+    "  ", ",", "\[IndentingNewLine]", 
+    RowBox[{"{", " ", 
+     RowBox[{"tmax", " ", ",", " ", "5", ",", " ", "20"}], " ", "}"}], " ", 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"ControlPlacement", "\[Rule]", "Bottom"}]}], 
+   "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]"}], "\n", 
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"REDO", " ", "These", " ", "parameters"}], ",", " ", 
+    RowBox[{
+    "very", " ", "easy", " ", "to", " ", "make", " ", "equations", " ", 
+     "stiff"}]}], " ", "*)"}], " "}]}], "Input",
+ CellLabel->"In[3]:=",ExpressionUUID->"2de5c140-089a-41d9-abbf-2e8f2374e12f"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`r0$$ = 0.9855, $CellContext`tmax$$ = 
+    11.9, $CellContext`vr0$$ = 1.0070000000000001`, $CellContext`vx0$$ = 
+    0.9, $CellContext`vy0$$ = 0.9685, $CellContext`vz0$$ = 
+    1.008, $CellContext`v\[Theta]0$$ = 0.9, $CellContext`v\[Phi]0$$ = 
+    0.9, $CellContext`x0$$ = 1.0145, $CellContext`y0$$ = 
+    0.9, $CellContext`z0$$ = 0.97, $CellContext`\[Theta]0$$ = 
+    0.9, $CellContext`\[Phi]0$$ = 0.9, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{
+      Hold[$CellContext`x0$$], 0.9, 1.1}, {
+      Hold[$CellContext`vx0$$], 0.9, 1.1}, {
+      Hold[$CellContext`y0$$], 0.9, 1.1}, {
+      Hold[$CellContext`vy0$$], 0.9, 1.1}, {
+      Hold[$CellContext`z0$$], 0.9, 1.1}, {
+      Hold[$CellContext`vz0$$], 0.9, 1.1}, {
+      Hold[$CellContext`r0$$], 0.9, 1.1}, {
+      Hold[$CellContext`vr0$$], 0.9, 1.1}, {
+      Hold[$CellContext`\[Theta]0$$], 0.9, 1.1}, {
+      Hold[$CellContext`v\[Theta]0$$], 0.9, 1.1}, {
+      Hold[$CellContext`\[Phi]0$$], 0.9, 1.1}, {
+      Hold[$CellContext`v\[Phi]0$$], 0.9, 1.1}, {
+      Hold[$CellContext`tmax$$], 5, 20}}, Typeset`size$$ = {
+    427., {119., 123.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`r0$$ = 0.9, $CellContext`tmax$$ = 
+        5, $CellContext`vr0$$ = 0.9, $CellContext`vx0$$ = 
+        0.9, $CellContext`vy0$$ = 0.9, $CellContext`vz0$$ = 
+        0.9, $CellContext`v\[Theta]0$$ = 0.9, $CellContext`v\[Phi]0$$ = 
+        0.9, $CellContext`x0$$ = 0.9, $CellContext`y0$$ = 
+        0.9, $CellContext`z0$$ = 0.9, $CellContext`\[Theta]0$$ = 
+        0.9, $CellContext`\[Phi]0$$ = 0.9}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, 
+      "Body" :> ($CellContext`dynamic = 
+       Module[{$CellContext`solution$}, 
+         Clear[$CellContext`q1]; $CellContext`q1 = {
+            $CellContext`x[$CellContext`t], 
+            $CellContext`y[$CellContext`t], 
+            $CellContext`z[$CellContext`t]}; 
+         Clear[$CellContext`q2]; $CellContext`q2 = {
+            $CellContext`r[$CellContext`t], 
+            $CellContext`\[Theta][$CellContext`t], 
+            $CellContext`\[Phi][$CellContext`t]}; 
+         Clear[$CellContext`r2]; $CellContext`r2 = \
+{$CellContext`r[$CellContext`t] Cos[
+              $CellContext`\[Phi][$CellContext`t]] Sin[
+              $CellContext`\[Theta][$CellContext`t]], \
+$CellContext`r[$CellContext`t] Sin[
+              $CellContext`\[Phi][$CellContext`t]] Sin[
+              $CellContext`\[Theta][$CellContext`t]], \
+$CellContext`r[$CellContext`t] Cos[
+              $CellContext`\[Theta][$CellContext`t]]}; 
+         Clear[$CellContext`q]; $CellContext`q = 
+          Union[$CellContext`q1, $CellContext`q2]; 
+         Clear[$CellContext`T]; $CellContext`T = (1/2) ($CellContext`M + 
+             2 $CellContext`m) Dot[
+              D[$CellContext`q1, $CellContext`t], 
+              D[$CellContext`q1, $CellContext`t]] (1/2) (2 $CellContext`m) 
+            Simplify[
+              Expand[
+               Dot[
+                D[$CellContext`r2, $CellContext`t], 
+                D[$CellContext`r2, $CellContext`t]]]] + (1/
+             2) ((1/12) $CellContext`M $CellContext`L^2) (
+             Derivative[1][$CellContext`\[Theta]][$CellContext`t]^2 + Sin[
+                 $CellContext`\[Theta][$CellContext`t]]^2 
+              Derivative[1][$CellContext`\[Phi]][$CellContext`t]^2); 
+         Clear[$CellContext`V]; $CellContext`V = 
+          2 ((1/2) K ($CellContext`r[$CellContext`t] - $CellContext`r0$$)^2); 
+         Clear[$CellContext`\[ScriptCapitalL]]; \
+$CellContext`\[ScriptCapitalL] = $CellContext`T - $CellContext`V; 
+         Clear[$CellContext`eqs]; $CellContext`eqs = 
+          VariationalMethods`EulerEquations[$CellContext`\[ScriptCapitalL], \
+$CellContext`q, $CellContext`t]; 
+         Clear[$CellContext`com]; $CellContext`com = 
+          VariationalMethods`FirstIntegrals[$CellContext`\[ScriptCapitalL], \
+$CellContext`q, $CellContext`t]; 
+         Clear[$CellContext`ics]; $CellContext`ics = {$CellContext`x[
+             0] == $CellContext`x0$$, 
+            Derivative[1][$CellContext`x][
+             0] == $CellContext`vx0$$, $CellContext`y[0] == $CellContext`y0$$,
+             Derivative[1][$CellContext`y][
+             0] == $CellContext`vy0$$, $CellContext`z[0] == $CellContext`z0$$,
+             Derivative[1][$CellContext`z][
+             0] == $CellContext`vz0$$, $CellContext`r[0] == $CellContext`r0$$,
+             Derivative[1][$CellContext`r][
+             0] == $CellContext`vr0$$, $CellContext`\[Theta][
+             0] == $CellContext`\[Theta]0$$, 
+            Derivative[1][$CellContext`\[Theta]][
+             0] == $CellContext`v\[Theta]0$$, $CellContext`\[Phi][
+             0] == $CellContext`\[Phi]0$$, 
+            Derivative[1][$CellContext`\[Phi]][0] == $CellContext`v\[Phi]0$$}; 
+         Clear[$CellContext`parameters]; $CellContext`parameters = \
+{$CellContext`m -> 2, $CellContext`M -> 10, $CellContext`L -> 2, K -> 
+            2, $CellContext`r0$$ -> 2}; 
+         Clear[$CellContext`solution$]; $CellContext`solution$ = First[
+            NDSolve[
+             Union[
+              
+              ReplaceAll[$CellContext`eqs, $CellContext`parameters], \
+$CellContext`ics], $CellContext`q, {$CellContext`t, 0, $CellContext`tmax$$}, 
+             Method -> {"EquationSimplification" -> "Residual"}]]; Plot[
+           Evaluate[
+            
+            ReplaceAll[$CellContext`q, $CellContext`solution$]], \
+{$CellContext`t, 0, $CellContext`tmax$$}, PlotLabel -> 
+           "Problem 2004 Page 468", PlotLegends -> $CellContext`q]]), 
+      "Specifications" :> {{$CellContext`x0$$, 0.9, 1.1}, {$CellContext`vx0$$,
+          0.9, 1.1}, {$CellContext`y0$$, 0.9, 1.1}, {$CellContext`vy0$$, 0.9, 
+         1.1}, {$CellContext`z0$$, 0.9, 1.1}, {$CellContext`vz0$$, 0.9, 
+         1.1}, {$CellContext`r0$$, 0.9, 1.1}, {$CellContext`vr0$$, 0.9, 
+         1.1}, {$CellContext`\[Theta]0$$, 0.9, 
+         1.1}, {$CellContext`v\[Theta]0$$, 0.9, 1.1}, {$CellContext`\[Phi]0$$,
+          0.9, 1.1}, {$CellContext`v\[Phi]0$$, 0.9, 
+         1.1}, {$CellContext`tmax$$, 5, 20}}, 
+      "Options" :> {ControlPlacement -> Bottom}, "DefaultOptions" :> {}],
+     ImageSizeCache->{472., {332., 338.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellLabel->"Out[4]=",ExpressionUUID->"a88fca4a-74c2-4209-9076-2e9a8c1b604d"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"?", "ParametricPlot3D"}]], "Input",
+ CellLabel->"In[5]:=",ExpressionUUID->"ee59c187-5403-4fad-8592-0075454e3ad9"],
+
+Cell[BoxData[
+ InterpretationBox[
+  StyleBox[
+   FrameBox[
+    DynamicModuleBox[{System`InformationDump`open$$ = False, 
+     System`InformationDump`mouseOver$$ = False}, 
+     PaneSelectorBox[{True->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False,
+             BaseStyle -> None],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox[
+           PaneBox[
+            TooltipBox[
+             ButtonBox[
+              PaneSelectorBox[{False->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIcon"]], True->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIconHot"]]}, Dynamic[
+                CurrentValue["MouseOver"]]],
+              Appearance->None,
+              BaseStyle->"Link",
+              ButtonData->"paclet:ref/ParametricPlot3D",
+              ButtonNote->"paclet:ref/ParametricPlot3D"],
+             "\"paclet:ref/ParametricPlot3D\""],
+            FrameMargins->{{0, 4}, {0, 2}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"\\!\\(\\*RowBox[{\\\"ParametricPlot3D\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], StyleBox[\\\"x\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], \
+StyleBox[\\\"y\\\", \\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \
+\\\"TI\\\"], StyleBox[\\\"z\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"u\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]}], \\\"}\\\"}]}], \\\"]\\\"}]\\) produces \
+a three-dimensional space curve parametrized by a variable \\!\\(\\*StyleBox[\
+\\\"u\\\", \\\"TI\\\"]\\) which runs from \
+\\!\\(\\*SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]]\\) to \\!\\(\\*SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]\\). \
+\\n\\!\\(\\*RowBox[{\\\"ParametricPlot3D\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{SubscriptBox[StyleBox[\\\"f\\\", \
+\\\"TI\\\"], StyleBox[\\\"x\\\", \\\"TI\\\"]], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], StyleBox[\\\"y\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], \
+StyleBox[\\\"z\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"u\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\
+\", RowBox[{StyleBox[\\\"v\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"v\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"v\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]}], \\\"}\\\"}]}], \\\"]\\\"}]\\) produces \
+a three-dimensional surface parametrized by \\!\\(\\*StyleBox[\\\"u\\\", \
+\\\"TI\\\"]\\) and \\!\\(\\*StyleBox[\\\"v\\\", \\\"TI\\\"]\\). \
+\\n\\!\\(\\*RowBox[{\\\"ParametricPlot3D\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], StyleBox[\\\"x\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], \
+StyleBox[\\\"y\\\", \\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \
+\\\"TI\\\"], StyleBox[\\\"z\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{SubscriptBox[StyleBox[\\\"g\\\", \\\"TI\\\"], \
+StyleBox[\\\"x\\\", \\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"g\\\", \
+\\\"TI\\\"], StyleBox[\\\"y\\\", \\\"TI\\\"]], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"g\\\", \\\"TI\\\"], StyleBox[\\\"z\\\", \
+\\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", StyleBox[\\\"\[Ellipsis]\\\", \
+\\\"TR\\\"]}], \\\"}\\\"}], \\\",\\\", StyleBox[\\\"\[Ellipsis]\\\", \\\"TR\\\
+\"]}], \\\"]\\\"}]\\) plots several objects together. \
+\\n\\!\\(\\*RowBox[{\\\"ParametricPlot3D\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"\[Ellipsis]\\\", \\\"TR\\\"], \\\",\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"u\\\", \\\"TI\\\"], \
+\\\",\\\", StyleBox[\\\"v\\\", \\\"TI\\\"]}], \\\"}\\\"}], \
+\\\"\[Element]\\\", StyleBox[\\\"reg\\\", \\\"TI\\\"]}]}], \\\"]\\\"}]\\) \
+takes parameters \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"u\\\", \
+\\\"TI\\\"], \\\",\\\", StyleBox[\\\"v\\\", \\\"TI\\\"]}], \\\"}\\\"}]\\) to \
+be in the geometric region \\!\\(\\*StyleBox[\\\"reg\\\", \
+\\\"TI\\\"]\\).\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          PaneBox[GridBox[{
+             {
+              
+              DynamicModuleBox[{System`InformationDump`open$$ = {
+               False, False, False, False, False, False, False, False, False, 
+                False, False, False}}, 
+               StyleBox[GridBox[{
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Documentation\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Documentation\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Documentation", "Tooltip"]& ], 
+                   TemplateBox[{
+                    
+                    TemplateBox[{
+                    "\"Local \[RightGuillemet]\"", 
+                    "paclet:ref/ParametricPlot3D", 
+                    "paclet:ref/ParametricPlot3D", "Link", {
+                    RGBColor[0.9686274509803922, 0.4666666666666667, 0.]}, 
+                    BaseStyle -> {
+                    RGBColor[0.0784313725490196, 0.1568627450980392, 0.6]}}, 
+                    "HyperlinkTemplate"], "\"  \"", 
+                    StyleBox[
+                    "\"|\"", "InformationRowLabel", StripOnInput -> False], 
+                    "\"  \"", 
+                    TemplateBox[{"\"Web \[RightGuillemet]\"", {
+                    URL[
+                    "http://reference.wolfram.com/language/ref/\
+ParametricPlot3D.html"], None}, 
+                    "http://reference.wolfram.com/language/ref/\
+ParametricPlot3D.html", "Hyperlink", {
+                    RGBColor[0.9686274509803922, 0.4666666666666667, 0.]}, 
+                    BaseStyle -> {
+                    RGBColor[0.0784313725490196, 0.1568627450980392, 0.6]}}, 
+                    "HyperlinkTemplate"]},
+                    "RowDefault"]},
+                  {
+                   PaneSelectorBox[{True->
+                    ButtonBox[
+                    PaneSelectorBox[{False->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "DownPointerOpener"]]},
+                    "RowWithSeparators"], True->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "DownPointerOpenerHot"]]},
+                    "RowWithSeparators"]}, Dynamic[
+                    CurrentValue["MouseOver"]],
+                    FrameMargins->0,
+                    ImageSize->Automatic],
+                    Appearance->None,
+                    BaseStyle->None,
+                    
+                    ButtonFunction:>(Part[System`InformationDump`open$$, 9] = 
+                    False),
+                    Evaluator->Automatic,
+                    FrameMargins->0,
+                    ImageMargins->0,
+                    Method->"Preemptive"], False->
+                    ButtonBox[
+                    PaneSelectorBox[{False->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "RightPointerOpener"]]},
+                    "RowWithSeparators"], True->
+                    TemplateBox[{"\[ThickSpace]", "\"\[ThickSpace]\"", 
+                    StyleBox[
+                    "\"Options\"", "InformationRowLabel", StripOnInput -> 
+                    False], 
+                    DynamicBox[
+                    FEPrivate`FrontEndResource[
+                    "FEBitmaps", "RightPointerOpenerHot"]]},
+                    "RowWithSeparators"]}, Dynamic[
+                    CurrentValue["MouseOver"]],
+                    FrameMargins->0,
+                    ImageSize->Automatic],
+                    Appearance->None,
+                    BaseStyle->None,
+                    
+                    ButtonFunction:>(Part[System`InformationDump`open$$, 9] = 
+                    True),
+                    Evaluator->Automatic,
+                    FrameMargins->0,
+                    ImageMargins->0,
+                    Method->"Preemptive"]}, Dynamic[
+                    FEPrivate`Part[System`InformationDump`open$$, 9]]], 
+                   PaneSelectorBox[{True->GridBox[{
+                    {
+                    RowBox[{"AlignmentPoint", "\[Rule]", "Center"}]},
+                    {
+                    RowBox[{"AspectRatio", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"AutomaticImageSize", "\[Rule]", "False"}]},
+                    {
+                    RowBox[{"Axes", "\[Rule]", "True"}]},
+                    {
+                    RowBox[{"AxesEdge", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"AxesLabel", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"AxesOrigin", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"AxesStyle", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{"Background", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"BaselinePosition", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"BaseStyle", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{"BoundaryStyle", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"Boxed", "\[Rule]", "True"}]},
+                    {
+                    RowBox[{"BoxRatios", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"BoxStyle", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{"ClipPlanes", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"ClipPlanesStyle", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ColorFunction", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ColorFunctionScaling", "\[Rule]", "True"}]},
+                    {
+                    RowBox[{"ColorOutput", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ContentSelectable", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ControllerLinking", "\[Rule]", "False"}]},
+                    {
+                    RowBox[{"ControllerMethod", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ControllerPath", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{
+                    "CoordinatesToolOptions", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{
+                    "DisplayFunction", "\[RuleDelayed]", "$DisplayFunction"}]},
+                    {
+                    RowBox[{"Epilog", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{"Evaluated", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"EvaluationMonitor", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"Exclusions", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ExclusionsStyle", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"FaceGrids", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"FaceGridsStyle", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{
+                    "FormatType", "\[RuleDelayed]", "TraditionalForm"}]},
+                    {
+                    RowBox[{"ImageMargins", "\[Rule]", "0.`"}]},
+                    {
+                    RowBox[{"ImagePadding", "\[Rule]", "All"}]},
+                    {
+                    RowBox[{"ImageSize", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ImageSizeRaw", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"LabelingSize", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"LabelStyle", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{"Lighting", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"MaxRecursion", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"Mesh", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"MeshFunctions", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"MeshShading", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"MeshStyle", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"Method", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"NormalsFunction", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{
+                    "PerformanceGoal", "\[RuleDelayed]", "$PerformanceGoal"}]},
+                    {
+                    RowBox[{"PlotLabel", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"PlotLabels", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"PlotLegends", "\[Rule]", "None"}]},
+                    {
+                    RowBox[{"PlotPoints", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"PlotRange", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"PlotRangePadding", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"PlotRegion", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"PlotStyle", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"PlotTheme", "\[RuleDelayed]", "$PlotTheme"}]},
+                    {
+                    RowBox[{
+                    "PreserveImageOptions", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"Prolog", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{"RegionFunction", "\[Rule]", 
+                    RowBox[{"(", 
+                    RowBox[{"True", "&"}], ")"}]}]},
+                    {
+                    RowBox[{"RotationAction", "\[Rule]", "\<\"Fit\"\>"}]},
+                    {
+                    RowBox[{"SphericalRegion", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"TargetUnits", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{
+                    "TextureCoordinateFunction", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{
+                    "TextureCoordinateScaling", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"Ticks", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"TicksStyle", "\[Rule]", 
+                    RowBox[{"{", "}"}]}]},
+                    {
+                    RowBox[{"TouchscreenAutoZoom", "\[Rule]", "False"}]},
+                    {
+                    RowBox[{"ViewAngle", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ViewCenter", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ViewMatrix", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ViewPoint", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"1.3`", ",", 
+                    RowBox[{"-", "2.4`"}], ",", "2.`"}], "}"}]}]},
+                    {
+                    RowBox[{"ViewProjection", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ViewRange", "\[Rule]", "All"}]},
+                    {
+                    RowBox[{"ViewVector", "\[Rule]", "Automatic"}]},
+                    {
+                    RowBox[{"ViewVertical", "\[Rule]", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "0", ",", "1"}], "}"}]}]},
+                    {
+                    RowBox[{
+                    "WorkingPrecision", "\[Rule]", "MachinePrecision"}]},
+                    {
+                    StyleBox[
+                    
+                    TemplateBox[{
+                    "\"(\"", "\"\[InvisibleSpace]\"", "78", "\" total)\""},
+                    "RowDefault"], "InformationRowOpener",
+                    StripOnInput->False]}
+                    },
+                    BaselinePosition->{Baseline, {1, 1}},
+                    DefaultBaseStyle->"Column",
+                    GridBoxAlignment->{"Columns" -> {{Left}}},
+                    
+                    GridBoxItemSize->{
+                    "Columns" -> {{Automatic}}, "Rows" -> {{1.}}}], False->
+                    RowBox[{
+                    RowBox[{"AlignmentPoint", "\[Rule]", "Center"}], 
+                    "\[ThinSpace]", 
+                    StyleBox["\<\"\[Ellipsis]\"\>", "InformationRowOpener",
+                    StripOnInput->False], "\[ThinSpace]", 
+                    StyleBox[
+                    
+                    TemplateBox[{
+                    "\"(\"", "\"\[InvisibleSpace]\"", "78", "\" total)\""},
+                    "RowDefault"], "InformationRowOpener",
+                    StripOnInput->False]}]}, Dynamic[
+                    FEPrivate`Part[System`InformationDump`open$$, 9]],
+                    BaselinePosition->Baseline,
+                    ImageSize->Automatic]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Attributes\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"Attributes\"",
+                    TooltipStyle->"TextStyling"],
+                    Annotation[#, "Attributes", "Tooltip"]& ], 
+                   RowBox[{"{", 
+                    RowBox[{
+                    "HoldAll", ",", "Protected", ",", "ReadProtected"}], 
+                    "}"}]},
+                  {
+                   TagBox[
+                    TooltipBox[
+                    StyleBox["\<\" Full Name\"\>", "InformationRowLabel",
+                    StripOnInput->False],
+                    "\"FullName\"",
+                    TooltipStyle->"TextStyling"],
+                    
+                    Annotation[#, "FullName", 
+                    "Tooltip"]& ], "\<\"System`ParametricPlot3D\"\>"}
+                 },
+                 AutoDelete->False,
+                 GridBoxAlignment->{"Columns" -> {Right, Left}},
+                 GridBoxDividers->None,
+                 GridBoxItemSize->{"Columns" -> {Automatic, Automatic}},
+                 GridBoxSpacings->{"Columns" -> {
+                    Offset[0.27999999999999997`], {
+                    Offset[0.5599999999999999]}, 
+                    Offset[0.27999999999999997`]}, "Rows" -> {
+                    Offset[0.2], {
+                    Offset[0.8]}, 
+                    Offset[0.2]}}], "DialogStyle",
+                StripOnInput->False],
+               DynamicModuleValues:>{}]}
+            },
+            DefaultBaseStyle->"Column",
+            GridBoxAlignment->{"Columns" -> {{Left}}},
+            GridBoxDividers->{"Columns" -> {{False}}, "Rows" -> {{False}}},
+            
+            GridBoxItemSize->{
+             "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}},
+            GridBoxSpacings->{"Columns" -> {
+                Offset[0.27999999999999997`], {
+                 Offset[0.5599999999999999]}, 
+                Offset[0.27999999999999997`]}, "Rows" -> {
+                Offset[0.2], {
+                 Offset[3.6]}, 
+                Offset[0.2]}}],
+           FrameMargins->6], ""},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpener"]], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "UpPointerOpenerHot"]]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, False],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"], False->
+      TagBox[GridBox[{
+         {
+          ItemBox[
+           PaneBox[
+            StyleBox["\<\" Symbol\"\>", "InformationTitleText",
+             StripOnInput->False],
+            FrameMargins->{{4, 0}, {-1, 1}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], 
+          ItemBox[
+           PaneBox[
+            TooltipBox[
+             ButtonBox[
+              PaneSelectorBox[{False->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIcon"],
+                ImageSizeCache->{13., {4., 9.}}], True->
+               
+               DynamicBox[FEPrivate`FrontEndResource[
+                "FEBitmaps", "InformationHelpIconHot"],
+                ImageSizeCache->{13., {4., 9.}}]}, Dynamic[
+                CurrentValue["MouseOver"]]],
+              Appearance->None,
+              BaseStyle->"Link",
+              ButtonData->"paclet:ref/ParametricPlot3D",
+              ButtonNote->"paclet:ref/ParametricPlot3D"],
+             "\"paclet:ref/ParametricPlot3D\""],
+            FrameMargins->{{0, 4}, {0, 2}}],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           PaneBox[
+            
+            StyleBox["\<\"\\!\\(\\*RowBox[{\\\"ParametricPlot3D\\\", \
+\\\"[\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], StyleBox[\\\"x\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], \
+StyleBox[\\\"y\\\", \\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \
+\\\"TI\\\"], StyleBox[\\\"z\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"u\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]}], \\\"}\\\"}]}], \\\"]\\\"}]\\) produces \
+a three-dimensional space curve parametrized by a variable \\!\\(\\*StyleBox[\
+\\\"u\\\", \\\"TI\\\"]\\) which runs from \
+\\!\\(\\*SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]]\\) to \\!\\(\\*SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]\\). \
+\\n\\!\\(\\*RowBox[{\\\"ParametricPlot3D\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{SubscriptBox[StyleBox[\\\"f\\\", \
+\\\"TI\\\"], StyleBox[\\\"x\\\", \\\"TI\\\"]], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], StyleBox[\\\"y\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], \
+StyleBox[\\\"z\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"u\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"u\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", RowBox[{\\\"{\\\
+\", RowBox[{StyleBox[\\\"v\\\", \\\"TI\\\"], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"v\\\", \\\"TI\\\"], StyleBox[\\\"min\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"v\\\", \\\"TI\\\"], \
+StyleBox[\\\"max\\\", \\\"TI\\\"]]}], \\\"}\\\"}]}], \\\"]\\\"}]\\) produces \
+a three-dimensional surface parametrized by \\!\\(\\*StyleBox[\\\"u\\\", \
+\\\"TI\\\"]\\) and \\!\\(\\*StyleBox[\\\"v\\\", \\\"TI\\\"]\\). \
+\\n\\!\\(\\*RowBox[{\\\"ParametricPlot3D\\\", \\\"[\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{RowBox[{\\\"{\\\", \
+RowBox[{SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], StyleBox[\\\"x\\\", \
+\\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \\\"TI\\\"], \
+StyleBox[\\\"y\\\", \\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"f\\\", \
+\\\"TI\\\"], StyleBox[\\\"z\\\", \\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", \
+RowBox[{\\\"{\\\", RowBox[{SubscriptBox[StyleBox[\\\"g\\\", \\\"TI\\\"], \
+StyleBox[\\\"x\\\", \\\"TI\\\"]], \\\",\\\", SubscriptBox[StyleBox[\\\"g\\\", \
+\\\"TI\\\"], StyleBox[\\\"y\\\", \\\"TI\\\"]], \\\",\\\", \
+SubscriptBox[StyleBox[\\\"g\\\", \\\"TI\\\"], StyleBox[\\\"z\\\", \
+\\\"TI\\\"]]}], \\\"}\\\"}], \\\",\\\", StyleBox[\\\"\[Ellipsis]\\\", \
+\\\"TR\\\"]}], \\\"}\\\"}], \\\",\\\", StyleBox[\\\"\[Ellipsis]\\\", \\\"TR\\\
+\"]}], \\\"]\\\"}]\\) plots several objects together. \
+\\n\\!\\(\\*RowBox[{\\\"ParametricPlot3D\\\", \\\"[\\\", \
+RowBox[{StyleBox[\\\"\[Ellipsis]\\\", \\\"TR\\\"], \\\",\\\", \
+RowBox[{RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"u\\\", \\\"TI\\\"], \
+\\\",\\\", StyleBox[\\\"v\\\", \\\"TI\\\"]}], \\\"}\\\"}], \
+\\\"\[Element]\\\", StyleBox[\\\"reg\\\", \\\"TI\\\"]}]}], \\\"]\\\"}]\\) \
+takes parameters \\!\\(\\*RowBox[{\\\"{\\\", RowBox[{StyleBox[\\\"u\\\", \
+\\\"TI\\\"], \\\",\\\", StyleBox[\\\"v\\\", \\\"TI\\\"]}], \\\"}\\\"}]\\) to \
+be in the geometric region \\!\\(\\*StyleBox[\\\"reg\\\", \
+\\\"TI\\\"]\\).\"\>", "InformationUsageText",
+             StripOnInput->False,
+             LineSpacing->{1.5, 1.5, 3.}],
+            FrameMargins->{{10, 10}, {8, 10}}],
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False], 
+          ItemBox["\<\"\"\>",
+           BaseStyle->"InformationUsageSubtitleBackground",
+           StripOnInput->False]},
+         {
+          ItemBox[
+           TagBox[
+            ButtonBox[
+             PaneSelectorBox[{False->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpener"],
+               ImageSizeCache->{10., {2., 8.}}], True->
+              
+              DynamicBox[FEPrivate`FrontEndResource[
+               "FEBitmaps", "DownPointerOpenerHot"],
+               ImageSizeCache->{10., {2., 8.}}]}, Dynamic[
+              System`InformationDump`mouseOver$$]],
+             Alignment->Left,
+             Appearance->{"Default" -> None},
+             
+             ButtonFunction:>FEPrivate`Set[
+              System`InformationDump`open$$, True],
+             Evaluator->Automatic,
+             FrameMargins->{{9, 0}, {0, 0}},
+             ImageMargins->0,
+             ImageSize->Full,
+             Method->"Preemptive"],
+            
+            EventHandlerTag[{
+             "MouseEntered" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, True], 
+              "MouseExited" :> 
+              FEPrivate`Set[System`InformationDump`mouseOver$$, False], 
+              Method -> "Preemptive", PassEventsDown -> Automatic, 
+              PassEventsUp -> True}]],
+           BaseStyle->"InformationTitleBackground",
+           StripOnInput->False], "\[SpanFromLeft]"}
+        },
+        AutoDelete->False,
+        FrameStyle->Directive[
+          GrayLevel[0.8], 
+          Thickness[Tiny]],
+        GridBoxAlignment->{"Columns" -> {Left, Right}, "Rows" -> {{Center}}},
+        GridBoxDividers->{
+         "Columns" -> {{None}}, "Rows" -> {False, {True}, False}},
+        GridBoxItemSize->{
+         "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}],
+       "Grid"]}, Dynamic[System`InformationDump`open$$],
+      BaselinePosition->Baseline,
+      FrameMargins->0,
+      ImageSize->Automatic],
+     DynamicModuleValues:>{}],
+    BaseStyle->"InformationGridFrame",
+    StripOnInput->False], "InformationGridPlain",
+   StripOnInput->False],
+  InformationData[
+   Association[
+   "ObjectType" -> "Symbol", "Usage" -> 
+    "\!\(\*RowBox[{\"ParametricPlot3D\", \"[\", RowBox[{RowBox[{\"{\", \
+RowBox[{SubscriptBox[StyleBox[\"f\", \"TI\"], StyleBox[\"x\", \"TI\"]], \
+\",\", SubscriptBox[StyleBox[\"f\", \"TI\"], StyleBox[\"y\", \"TI\"]], \",\", \
+SubscriptBox[StyleBox[\"f\", \"TI\"], StyleBox[\"z\", \"TI\"]]}], \"}\"}], \
+\",\", RowBox[{\"{\", RowBox[{StyleBox[\"u\", \"TI\"], \",\", \
+SubscriptBox[StyleBox[\"u\", \"TI\"], StyleBox[\"min\", \"TI\"]], \",\", \
+SubscriptBox[StyleBox[\"u\", \"TI\"], StyleBox[\"max\", \"TI\"]]}], \
+\"}\"}]}], \"]\"}]\) produces a three-dimensional space curve parametrized by \
+a variable \!\(\*StyleBox[\"u\", \"TI\"]\) which runs from \
+\!\(\*SubscriptBox[StyleBox[\"u\", \"TI\"], StyleBox[\"min\", \"TI\"]]\) to \
+\!\(\*SubscriptBox[StyleBox[\"u\", \"TI\"], StyleBox[\"max\", \"TI\"]]\). \n\
+\!\(\*RowBox[{\"ParametricPlot3D\", \"[\", RowBox[{RowBox[{\"{\", \
+RowBox[{SubscriptBox[StyleBox[\"f\", \"TI\"], StyleBox[\"x\", \"TI\"]], \
+\",\", SubscriptBox[StyleBox[\"f\", \"TI\"], StyleBox[\"y\", \"TI\"]], \",\", \
+SubscriptBox[StyleBox[\"f\", \"TI\"], StyleBox[\"z\", \"TI\"]]}], \"}\"}], \
+\",\", RowBox[{\"{\", RowBox[{StyleBox[\"u\", \"TI\"], \",\", \
+SubscriptBox[StyleBox[\"u\", \"TI\"], StyleBox[\"min\", \"TI\"]], \",\", \
+SubscriptBox[StyleBox[\"u\", \"TI\"], StyleBox[\"max\", \"TI\"]]}], \"}\"}], \
+\",\", RowBox[{\"{\", RowBox[{StyleBox[\"v\", \"TI\"], \",\", \
+SubscriptBox[StyleBox[\"v\", \"TI\"], StyleBox[\"min\", \"TI\"]], \",\", \
+SubscriptBox[StyleBox[\"v\", \"TI\"], StyleBox[\"max\", \"TI\"]]}], \
+\"}\"}]}], \"]\"}]\) produces a three-dimensional surface parametrized by \
+\!\(\*StyleBox[\"u\", \"TI\"]\) and \!\(\*StyleBox[\"v\", \"TI\"]\). \n\
+\!\(\*RowBox[{\"ParametricPlot3D\", \"[\", RowBox[{RowBox[{\"{\", \
+RowBox[{RowBox[{\"{\", RowBox[{SubscriptBox[StyleBox[\"f\", \"TI\"], \
+StyleBox[\"x\", \"TI\"]], \",\", SubscriptBox[StyleBox[\"f\", \"TI\"], \
+StyleBox[\"y\", \"TI\"]], \",\", SubscriptBox[StyleBox[\"f\", \"TI\"], \
+StyleBox[\"z\", \"TI\"]]}], \"}\"}], \",\", RowBox[{\"{\", \
+RowBox[{SubscriptBox[StyleBox[\"g\", \"TI\"], StyleBox[\"x\", \"TI\"]], \
+\",\", SubscriptBox[StyleBox[\"g\", \"TI\"], StyleBox[\"y\", \"TI\"]], \",\", \
+SubscriptBox[StyleBox[\"g\", \"TI\"], StyleBox[\"z\", \"TI\"]]}], \"}\"}], \
+\",\", StyleBox[\"\[Ellipsis]\", \"TR\"]}], \"}\"}], \",\", StyleBox[\"\
+\[Ellipsis]\", \"TR\"]}], \"]\"}]\) plots several objects together. \n\
+\!\(\*RowBox[{\"ParametricPlot3D\", \"[\", RowBox[{StyleBox[\"\[Ellipsis]\", \
+\"TR\"], \",\", RowBox[{RowBox[{\"{\", RowBox[{StyleBox[\"u\", \"TI\"], \
+\",\", StyleBox[\"v\", \"TI\"]}], \"}\"}], \"\[Element]\", StyleBox[\"reg\", \
+\"TI\"]}]}], \"]\"}]\) takes parameters \!\(\*RowBox[{\"{\", \
+RowBox[{StyleBox[\"u\", \"TI\"], \",\", StyleBox[\"v\", \"TI\"]}], \"}\"}]\) \
+to be in the geometric region \!\(\*StyleBox[\"reg\", \"TI\"]\).", 
+    "Documentation" -> 
+    Association[
+     "Local" -> "paclet:ref/ParametricPlot3D", "Web" -> 
+      "http://reference.wolfram.com/language/ref/ParametricPlot3D.html"], 
+    "OwnValues" -> None, "UpValues" -> None, "DownValues" -> None, 
+    "SubValues" -> None, "DefaultValues" -> None, "NValues" -> None, 
+    "FormatValues" -> None, 
+    "Options" -> {
+     AlignmentPoint -> Center, AspectRatio -> Automatic, AutomaticImageSize -> 
+      False, Axes -> True, AxesEdge -> Automatic, AxesLabel -> None, 
+      AxesOrigin -> Automatic, AxesStyle -> {}, Background -> None, 
+      BaselinePosition -> Automatic, BaseStyle -> {}, BoundaryStyle -> None, 
+      Boxed -> True, BoxRatios -> Automatic, BoxStyle -> {}, ClipPlanes -> 
+      None, ClipPlanesStyle -> Automatic, ColorFunction -> Automatic, 
+      ColorFunctionScaling -> True, ColorOutput -> Automatic, 
+      ContentSelectable -> Automatic, ControllerLinking -> False, 
+      ControllerMethod -> Automatic, ControllerPath -> Automatic, 
+      CoordinatesToolOptions -> Automatic, 
+      DisplayFunction :> $DisplayFunction, Epilog -> {}, Evaluated -> 
+      Automatic, EvaluationMonitor -> None, Exclusions -> Automatic, 
+      ExclusionsStyle -> None, FaceGrids -> None, FaceGridsStyle -> {}, 
+      FormatType :> TraditionalForm, ImageMargins -> 0., ImagePadding -> All, 
+      ImageSize -> Automatic, ImageSizeRaw -> Automatic, LabelingSize -> 
+      Automatic, LabelStyle -> {}, Lighting -> Automatic, MaxRecursion -> 
+      Automatic, Mesh -> Automatic, MeshFunctions -> Automatic, MeshShading -> 
+      None, MeshStyle -> Automatic, Method -> Automatic, NormalsFunction -> 
+      Automatic, PerformanceGoal :> $PerformanceGoal, PlotLabel -> None, 
+      PlotLabels -> None, PlotLegends -> None, PlotPoints -> Automatic, 
+      PlotRange -> Automatic, PlotRangePadding -> Automatic, PlotRegion -> 
+      Automatic, PlotStyle -> Automatic, PlotTheme :> $PlotTheme, 
+      PreserveImageOptions -> Automatic, Prolog -> {}, 
+      RegionFunction -> (True& ), RotationAction -> "Fit", SphericalRegion -> 
+      Automatic, TargetUnits -> Automatic, TextureCoordinateFunction -> 
+      Automatic, TextureCoordinateScaling -> Automatic, Ticks -> Automatic, 
+      TicksStyle -> {}, TouchscreenAutoZoom -> False, ViewAngle -> Automatic, 
+      ViewCenter -> Automatic, ViewMatrix -> Automatic, 
+      ViewPoint -> {1.3, -2.4, 2.}, ViewProjection -> Automatic, ViewRange -> 
+      All, ViewVector -> Automatic, ViewVertical -> {0, 0, 1}, 
+      WorkingPrecision -> MachinePrecision}, 
+    "Attributes" -> {HoldAll, Protected, ReadProtected}, "FullName" -> 
+    "System`ParametricPlot3D"], False]]], "Output",
+ CellLabel->"Out[5]=",ExpressionUUID->"f1e92b5c-e441-441e-b996-9129f3ad0e82"]
+}, Open  ]]
+},
+WindowSize->{1011, 755},
+WindowMargins->{{0, Automatic}, {Automatic, -80}},
+FrontEndVersion->"12.1 for Mac OS X x86 (64-bit) (June 19, 2020)",
+StyleDefinitions->FrontEnd`FileName[{"Report"}, "StandardReport.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"387b4577-9ebc-4019-a5a4-7989c82095b4"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 2174, 57, 336, "Input",ExpressionUUID->"a15d7a75-df14-4b8b-9bb1-fd89f5ec7448"],
+Cell[CellGroupData[{
+Cell[2779, 83, 352, 8, 24, "Print",ExpressionUUID->"bd81a46c-a460-4973-bd21-eb87a27c421a"],
+Cell[3134, 93, 369, 9, 24, "Print",ExpressionUUID->"9e3e00f6-7f9a-4954-a364-ac039597103a"]
+}, Open  ]],
+Cell[3518, 105, 481, 8, 63, "Output",ExpressionUUID->"d2e45bf6-07b8-4279-8d6b-398f9b7240e9"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4036, 118, 12167, 280, 1676, "Input",ExpressionUUID->"2de5c140-089a-41d9-abbf-2e8f2374e12f"],
+Cell[16206, 400, 7210, 136, 696, "Output",ExpressionUUID->"a88fca4a-74c2-4209-9076-2e9a8c1b604d"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[23453, 541, 137, 2, 41, "Input",ExpressionUUID->"ee59c187-5403-4fad-8592-0075454e3ad9"],
+Cell[23593, 545, 36103, 737, 205, "Output",ExpressionUUID->"f1e92b5c-e441-441e-b996-9129f3ad0e82"]
+}, Open  ]]
+}
+]
+*)
+
